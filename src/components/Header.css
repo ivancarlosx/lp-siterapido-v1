@@ -11,7 +11,7 @@
 
 .header-scrolled {
   padding: 1rem 0;
-  background: rgba(10, 10, 10, 0.85);
+  background: var(--header-bg-scrolled);
   backdrop-filter: blur(12px);
   border-bottom-color: var(--border-color);
   box-shadow: var(--shadow-sm);
@@ -50,6 +50,24 @@
 
 .nav-links a:not(.btn):hover {
   color: var(--color-brand);
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+}
+
+.theme-toggle:hover {
+  background: var(--color-brand);
+  color: var(--bg-primary);
+  border-color: var(--color-brand);
 }
 
 .mobile-menu-btn {

@@ -51,7 +51,7 @@
 
 .bento-highlight {
   grid-column: 1 / -1;
-  background: linear-gradient(135deg, rgba(156, 214, 83, 0.05), rgba(26, 26, 26, 0.9));
+  background: var(--bento-gradient);
   border-color: rgba(156, 214, 83, 0.3);
   position: relative;
   overflow: hidden;

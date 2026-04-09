@@ -1,10 +1,17 @@
 import { useState, useEffect } from 'react';
-import { Rocket, Menu, X } from 'lucide-react';
+import { Rocket, Menu, X, Sun, Moon } from 'lucide-react';
 import './Header.css';
 
 export function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [theme, setTheme] = useState('dark');
+
+  const toggleTheme = () => {
+    const newTheme = theme === 'dark' ? 'light' : 'dark';
+    setTheme(newTheme);
+    document.documentElement.setAttribute('data-theme', newTheme);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,6 +37,10 @@ export function Header() {
           <a href="#modelos" onClick={toggleMenu}>Modelos</a>
           <a href="#planos" onClick={toggleMenu}>Planos</a>
           <a href="#faq" onClick={toggleMenu}>FAQ</a>
+          
+          <button className="theme-toggle" onClick={toggleTheme} aria-label="Alterar Tema">
+            {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+          </button>
           
           <a href="#contato" className="btn btn-primary nav-cta">
             Falar no WhatsApp
