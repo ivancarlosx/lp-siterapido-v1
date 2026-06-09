@@ -1,0 +1,157 @@
+/* ================================================================== */
+/*  "Como funciona" — horizontal timeline (less boxed)                 */
+/* ================================================================== */
+.v2-method .v2-head { margin-bottom: 3rem; }
+
+.v2-timeline { position: relative; }
+
+.v2-tl-grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  height: 460px;
+}
+.v2-tl-step {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  height: 100%;
+  padding-top: var(--off, 0px);
+}
+.v2-tl-step:nth-child(1) { --off: 0px; }
+.v2-tl-step:nth-child(2) { --off: 110px; }
+.v2-tl-step:nth-child(3) { --off: 44px; }
+
+.v2-tl-content { max-width: 26ch; }
+.v2-tl-n {
+  font-family: var(--v2-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--v2-accent-deep);
+  letter-spacing: 0.14em;
+}
+.v2-tl-content h3 {
+  font-family: var(--v2-font);
+  font-weight: 600;
+  font-size: 1.3rem;
+  letter-spacing: -0.01em;
+  margin-top: 0.5rem;
+}
+.v2-tl-content p {
+  color: var(--v2-dim);
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-top: 0.65rem;
+}
+
+/* vertical connector down to the axis */
+.v2-tl-line {
+  position: relative;
+  width: 1.5px;
+  flex: 1;
+  min-height: 48px;
+  margin: 1.3rem 0 0 1.4rem;
+  background: linear-gradient(180deg, rgba(204, 253, 84, 0.32), rgba(204, 253, 84, 0.04) 92%, transparent);
+}
+/* bright fill that grows down the line on hover */
+.v2-tl-line::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--v2-accent), rgba(204, 253, 84, 0.35));
+  box-shadow: 0 0 12px rgba(204, 253, 84, 0.65);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform 0.55s var(--v2-ease);
+}
+
+/* duration pill sitting on the axis */
+.v2-tl-pill {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  margin-left: 0.65rem;
+  padding: 0.5rem 1.1rem 0.5rem 0.55rem;
+  border-radius: 12px;
+  border: 1px solid var(--v2-line-2);
+  background: var(--v2-bg-2);
+  font-size: 0.92rem;
+  font-weight: 500;
+  white-space: nowrap;
+  box-shadow: 0 10px 30px -16px rgba(0, 0, 0, 0.8);
+}
+.v2-tl-sq {
+  width: 22px;
+  height: 22px;
+  border-radius: 6px;
+  background: var(--v2-accent);
+  box-shadow: 0 0 14px -2px rgba(204, 253, 84, 0.75);
+}
+
+/* ruler axis */
+.v2-tl-axis {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 46px;
+  display: flex;
+  align-items: center;
+  z-index: 0;
+}
+.v2-tl-ruler {
+  flex: 1;
+  height: 16px;
+  background-image: repeating-linear-gradient(90deg, var(--v2-line-2) 0 1.5px, transparent 1.5px 9px);
+  -webkit-mask: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  mask: linear-gradient(90deg, transparent, #000 3%, #000 97%, transparent);
+  opacity: 0.5;
+}
+
+@media (max-width: 760px) {
+  .v2-tl-grid { grid-template-columns: 1fr; height: auto; gap: 2.6rem; }
+  .v2-tl-step {
+    padding-top: 0 !important;
+    height: auto;
+    align-items: center;
+    text-align: center;
+  }
+  .v2-tl-content { max-width: 34ch; }
+  .v2-tl-line { flex: none; height: 28px; min-height: 28px; margin: 1rem 0 0; }
+  .v2-tl-pill { margin-left: 0; }
+  .v2-tl-axis { display: none; }
+}
+
+/* ---- interactive hover ---- */
+.v2-tl-content,
+.v2-tl-content h3,
+.v2-tl-n,
+.v2-tl-pill,
+.v2-tl-sq {
+  transition: color 0.3s var(--v2-ease), transform 0.3s var(--v2-ease),
+    background 0.3s var(--v2-ease), border-color 0.3s var(--v2-ease),
+    box-shadow 0.3s var(--v2-ease);
+}
+.v2-tl-step:hover .v2-tl-content { transform: translateY(-4px); }
+.v2-tl-step:hover .v2-tl-content h3 { color: var(--v2-accent); }
+.v2-tl-step:hover .v2-tl-n { color: var(--v2-accent); }
+.v2-tl-step:hover .v2-tl-line::after { transform: scaleY(1); }
+.v2-tl-step:hover .v2-tl-pill {
+  border-color: var(--v2-accent-line);
+  background: rgba(204, 253, 84, 0.07);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 34px -16px rgba(204, 253, 84, 0.5);
+}
+.v2-tl-step:hover .v2-tl-sq {
+  transform: scale(1.12);
+  box-shadow: 0 0 22px 0 rgba(204, 253, 84, 0.9);
+}
+@media (prefers-reduced-motion: reduce) {
+  .v2-tl-line::after,
+  .v2-tl-content,
+  .v2-tl-pill,
+  .v2-tl-sq { transition: none; }
+}

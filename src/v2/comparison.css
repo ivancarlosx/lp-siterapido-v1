@@ -1,0 +1,60 @@
+/* ================================================================== */
+/*  Scroll-driven comparison section                                   */
+/*  --p / --p1 / --p2 / --p3 are set by JS from scroll position.       */
+/* ================================================================== */
+.v2-compare-sec {
+  --p1: 0;
+  --p2: 0;
+  --p3: 0;
+}
+
+.v2-compare {
+  perspective: 1000px;
+}
+
+/* staggered, directional fly-in — each card scales to 1.0 at rest (equal height) */
+.v2-compare-sec .v2-compare-col {
+  opacity: calc(0.03 + var(--cp, 1) * 0.97);
+  will-change: transform, opacity;
+}
+/* left card flies in from the lower-left, tilting toward center */
+.v2-compare-sec .v2-compare-col:nth-child(1) {
+  --cp: var(--p1);
+  transform-origin: 100% 100%;
+  transform:
+    translate3d(calc((1 - var(--cp)) * -72px), calc((1 - var(--cp)) * 120px), 0)
+    rotateY(calc((1 - var(--cp)) * 16deg))
+    rotateX(calc((1 - var(--cp)) * 22deg))
+    scale(calc(0.84 + var(--cp) * 0.16));
+}
+/* middle card rises straight up */
+.v2-compare-sec .v2-compare-col:nth-child(2) {
+  --cp: var(--p2);
+  transform-origin: 50% 100%;
+  transform:
+    translate3d(0, calc((1 - var(--cp)) * 155px), 0)
+    rotateX(calc((1 - var(--cp)) * 30deg))
+    scale(calc(0.84 + var(--cp) * 0.16));
+}
+/* winner flies in from the lower-right and lands last */
+.v2-compare-sec .v2-compare-col:nth-child(3) {
+  --cp: var(--p3);
+  transform-origin: 0% 100%;
+  transform:
+    translate3d(calc((1 - var(--cp)) * 70px), calc((1 - var(--cp)) * 145px), 0)
+    rotateY(calc((1 - var(--cp)) * -16deg))
+    rotateX(calc((1 - var(--cp)) * 20deg))
+    scale(calc(0.84 + var(--cp) * 0.16));
+}
+
+/* winner glow intensifies strongly with scroll progress */
+.v2-compare-sec .v2-win-col {
+  box-shadow: 0 40px 100px -42px rgba(204, 253, 84, calc(0.08 + var(--p3) * 0.85));
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .v2-compare-sec .v2-compare-col {
+    transform: none;
+    opacity: 1;
+  }
+}
