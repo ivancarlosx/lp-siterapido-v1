@@ -20,6 +20,7 @@ import { Logo } from './Logo';
 import { initLenis, destroyLenis, lenisStop, lenisStart } from './lenis';
 import 'lenis/dist/lenis.css';
 import './v2.css';
+import './v2-white.css';
 
 /* ------------------------------------------------------------------ */
 /*  Animated count-up for the big stat numbers                         */
@@ -36,7 +37,7 @@ function AnimatedNumber({ value }: { value: string }) {
     const el = ref.current;
     if (!el) return;
     if (target === 0 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      setN(target);
+      queueMicrotask(() => setN(target));
       return;
     }
     let raf = 0;
@@ -108,7 +109,11 @@ const faqs = [
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
-export function LandingV2() {
+type LandingV2Props = {
+  variant?: 'dark' | 'white';
+};
+
+export function LandingV2({ variant = 'dark' }: LandingV2Props) {
   const [scrolled, setScrolled] = useState(false);
   const [annual, setAnnual] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -168,7 +173,7 @@ export function LandingV2() {
   );
 
   return (
-    <div className="v2">
+    <div className={`v2 ${variant === 'white' ? 'v2-white' : ''}`}>
       <Cursor />
       <div className="v2-grain" aria-hidden />
 
@@ -176,7 +181,7 @@ export function LandingV2() {
       <header className={`v2-nav ${scrolled ? 'is-scrolled' : ''}`}>
         <div className="v2-wrap v2-nav-inner">
           <a href="#top" className="v2-logo">
-            <Logo />
+            <Logo variant={variant} />
           </a>
           <nav className="v2-nav-links">
             <a href="#metodo">Método</a>
@@ -415,7 +420,7 @@ export function LandingV2() {
         <div className="v2-wrap v2-footer-inner">
           <div className="v2-footer-brand">
             <a href="#top" className="v2-logo">
-              <Logo />
+              <Logo variant={variant} />
             </a>
             <p>Mais rápido, mais barato, mais profissional. Do briefing ao ar em 48 horas.</p>
           </div>

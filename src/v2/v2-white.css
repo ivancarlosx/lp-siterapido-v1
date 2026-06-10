@@ -1,0 +1,201 @@
+/* White-mode variation for /v2-white. Keeps the v2 structure intact. */
+.v2-white {
+  --v2-bg: #fbfcf7;
+  --v2-bg-2: #f3f6ed;
+  --v2-surface: rgba(255, 255, 255, 0.72);
+  --v2-surface-2: rgba(10, 14, 8, 0.045);
+  --v2-line: rgba(22, 31, 16, 0.1);
+  --v2-line-2: rgba(22, 31, 16, 0.18);
+
+  --v2-text: #11170c;
+  --v2-dim: #58604f;
+  --v2-faint-real: #7a846f;
+
+  --v2-accent: #b7f33d;
+  --v2-accent-deep: #6ca910;
+  --v2-accent-soft: rgba(183, 243, 61, 0.18);
+  --v2-accent-line: rgba(108, 169, 16, 0.32);
+
+  background:
+    linear-gradient(180deg, #ffffff 0%, #fbfcf7 36%, #f6f9f0 100%);
+  color: var(--v2-text);
+}
+
+.v2-white .v2-grain {
+  background:
+    radial-gradient(86% 58% at 50% -12%, rgba(183, 243, 61, 0.24), transparent 66%),
+    radial-gradient(60% 44% at 96% 6%, rgba(129, 184, 255, 0.16), transparent 62%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.7), transparent 42%);
+  opacity: 1;
+}
+
+.v2-white .v2-nav.is-scrolled {
+  background: rgba(251, 252, 247, 0.78);
+  box-shadow: 0 14px 40px -32px rgba(17, 23, 12, 0.36);
+}
+
+.v2-white .v2-btn-primary {
+  color: #11170c;
+  box-shadow: 0 12px 26px -18px rgba(108, 169, 16, 0.7);
+}
+
+.v2-white .v2-btn-primary:hover {
+  --fill: #c8fb5d;
+  box-shadow: 0 16px 38px -18px rgba(108, 169, 16, 0.7);
+}
+
+.v2-white .v2-btn-ghost {
+  background: rgba(255, 255, 255, 0.74);
+  box-shadow: 0 12px 30px -26px rgba(17, 23, 12, 0.34);
+}
+
+.v2-white .v2-btn-ghost:hover {
+  background: #ffffff;
+  border-color: rgba(108, 169, 16, 0.28);
+}
+
+.v2-white .v2-hero-glow {
+  background: radial-gradient(50% 50% at 50% 50%, rgba(183, 243, 61, 0.28), transparent 72%);
+  filter: blur(26px);
+}
+
+.v2-white .v2-hero-beams-base {
+  background:
+    repeating-linear-gradient(90deg, rgba(17, 23, 12, 0.055) 0 1px, transparent 1px 132px),
+    radial-gradient(130% 86% at 50% 0%, rgba(183, 243, 61, 0.22), transparent 60%);
+}
+
+.v2-white .v2-hero-beams-lit {
+  background:
+    repeating-linear-gradient(90deg, rgba(108, 169, 16, 0.38) 0 1.5px, transparent 1.5px 132px),
+    rgba(183, 243, 61, 0.1);
+}
+
+.v2-white .v2-hero-spot {
+  background: radial-gradient(260px circle at var(--mx) var(--my), rgba(108, 169, 16, 0.2), transparent 70%);
+}
+
+.v2-white .v2-eyebrow,
+.v2-white .v2-frame,
+.v2-white .v2-compare-col,
+.v2-white .v2-step,
+.v2-white .v2-tpl,
+.v2-white .v2-quote,
+.v2-white .v2-plan,
+.v2-white .v2-tcard-text,
+.v2-white .v2-toggle,
+.v2-white .v2-pill,
+.v2-white .v2-tl-pill {
+  background: rgba(255, 255, 255, 0.76);
+  box-shadow: 0 20px 55px -44px rgba(17, 23, 12, 0.42);
+}
+
+.v2-white .v2-frame {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.92), rgba(245, 249, 238, 0.86));
+}
+
+.v2-white .v2-frame-bar,
+.v2-white .v2-modal-bar {
+  background: rgba(17, 23, 12, 0.035);
+}
+
+.v2-white .v2-frame-bar > span,
+.v2-white .v2-modal-bar > span {
+  background: rgba(17, 23, 12, 0.2);
+}
+
+.v2-white .v2-frame-url,
+.v2-white .v2-modal-url {
+  background: rgba(255, 255, 255, 0.75);
+}
+
+.v2-white .v2-sk {
+  background: rgba(17, 23, 12, 0.075);
+}
+
+.v2-white .v2-sk-hero {
+  background: linear-gradient(110deg, rgba(183, 243, 61, 0.3), rgba(17, 23, 12, 0.06));
+}
+
+.v2-white .v2-stats,
+.v2-white .v2-footer {
+  background: rgba(243, 246, 237, 0.88);
+}
+
+.v2-white .v2-win-col,
+.v2-white .v2-plan-featured {
+  background: linear-gradient(180deg, rgba(183, 243, 61, 0.22), rgba(255, 255, 255, 0.82));
+  box-shadow: 0 34px 80px -56px rgba(108, 169, 16, 0.7);
+}
+
+.v2-white .v2-compare-sec .v2-win-col {
+  box-shadow: 0 38px 90px -48px rgba(108, 169, 16, calc(0.14 + var(--p3) * 0.62));
+}
+
+.v2-white .v2-tpl-img img {
+  filter: saturate(0.95) brightness(1.02);
+}
+
+.v2-white .v2-tpl:hover .v2-tpl-img img {
+  filter: saturate(1.05) brightness(1.04);
+}
+
+.v2-white .v2-tpl-over {
+  background: linear-gradient(to top, rgba(17, 23, 12, 0.78), transparent);
+  color: #eaffad;
+}
+
+.v2-white .v2-toggle button.is-on {
+  background: var(--v2-text);
+  color: #ffffff;
+}
+
+.v2-white .v2-faq.is-open .v2-faq-q {
+  color: var(--v2-accent-deep);
+}
+
+.v2-white .v2-cta-beams-base {
+  background:
+    repeating-linear-gradient(90deg, rgba(17, 23, 12, 0.05) 0 1px, transparent 1px 132px),
+    radial-gradient(130% 80% at 50% 125%, rgba(183, 243, 61, 0.26), transparent 60%);
+}
+
+.v2-white .v2-cta-beams-lit {
+  background:
+    repeating-linear-gradient(90deg, rgba(108, 169, 16, 0.36) 0 1.5px, transparent 1.5px 132px),
+    rgba(183, 243, 61, 0.12);
+}
+
+.v2-white .v2-modal {
+  background: rgba(248, 250, 244, 0.78);
+}
+
+.v2-white .v2-modal-card,
+.v2-white .v2-vmodal {
+  background: #fbfcf7;
+  box-shadow: 0 44px 120px -42px rgba(17, 23, 12, 0.42);
+}
+
+.v2-white .v2-modal-close {
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.v2-white .v2-modal-cta {
+  background: #ffffff;
+}
+
+.v2-white .v2-modal-section .sk {
+  background: rgba(17, 23, 12, 0.08);
+}
+
+.v2-white .v2-section::before {
+  background: radial-gradient(50% 50% at 50% 50%, rgba(183, 243, 61, 0.14), transparent 72%);
+}
+
+.v2-white .v2-cursor-dot {
+  box-shadow: 0 0 12px 1px rgba(108, 169, 16, 0.65);
+}
+
+.v2-white .v2-cursor-ring {
+  border-color: rgba(108, 169, 16, 0.48);
+}

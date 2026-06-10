@@ -24,7 +24,7 @@ export function Reveal({
     // is never left stuck at opacity 0 if the observer's first tick is delayed.
     const rect = el.getBoundingClientRect();
     if (rect.top < window.innerHeight && rect.bottom > 0) {
-      setShown(true);
+      queueMicrotask(() => setShown(true));
       return;
     }
 

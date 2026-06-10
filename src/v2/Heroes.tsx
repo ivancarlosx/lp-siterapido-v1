@@ -223,11 +223,3 @@ export function HeroC() {
     </section>
   );
 }
-
-export const HEROES = {
-  A: { label: 'Editorial', Component: HeroA },
-  B: { label: 'Split', Component: HeroB },
-  C: { label: 'Minimal', Component: HeroC },
-} as const;
-
-export type HeroKey = keyof typeof HEROES;

@@ -11,6 +11,7 @@ createRoot(document.getElementById('root')!).render(
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/v2-ivan" element={<LandingV2 />} />
+        <Route path="/v2-white" element={<LandingV2 variant="white" />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
