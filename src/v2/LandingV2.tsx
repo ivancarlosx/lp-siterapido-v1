@@ -2,12 +2,21 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ArrowUpRight,
   ArrowRight,
+  ChevronLeft,
+  ChevronRight,
   Check,
+  BadgeCheck,
+  Globe2,
   Plus,
   Minus,
   MessageCircle,
   Clock,
+  PlayCircle,
   ShieldCheck,
+  Star,
+  Target,
+  Users,
+  Wrench,
   X,
 } from 'lucide-react';
 import { Reveal } from './Reveal';
@@ -21,6 +30,7 @@ import { initLenis, destroyLenis, lenisStop, lenisStart } from './lenis';
 import 'lenis/dist/lenis.css';
 import './v2.css';
 import './v2-white.css';
+import './v2-complete.css';
 
 /* ------------------------------------------------------------------ */
 /*  Animated count-up for the big stat numbers                         */
@@ -111,6 +121,289 @@ const WHATSAPP_MESSAGE =
 const WHATSAPP_URL =
   import.meta.env.VITE_WHATSAPP_URL ||
   `https://wa.me/?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+const COMPLETE_VIDEO_URL = import.meta.env.VITE_COMPLETE_VIDEO_URL || '';
+
+const socialProof = [
+  { value: '48h', label: 'prazo médio de primeira versão' },
+  { value: '+120', label: 'sites entregues para negócios locais' },
+  { value: 'R$ 0', label: 'custo inicial de criação' },
+  { value: '4.9/5', label: 'média de satisfação no atendimento' },
+];
+
+const audiences = [
+  { icon: Target, title: 'Profissionais liberais', text: 'Dentistas, psicólogos, fisioterapeutas e consultores que precisam gerar confiança rápido.' },
+  { icon: Users, title: 'Negócios locais', text: 'Clínicas, academias, salões e serviços que dependem de agenda, WhatsApp e indicação.' },
+  { icon: Globe2, title: 'Marcas começando', text: 'Empresas que querem sair do improviso sem investir milhares no primeiro site.' },
+];
+
+const includedItems = [
+  'Design profissional personalizado',
+  'Hospedagem rápida e segura',
+  'SSL, SEO básico e performance',
+  'Botões e integração com WhatsApp',
+  'Domínio grátis no plano Profissional',
+  'Manutenção e edições mensais',
+];
+
+const teamMembers = [
+  {
+    name: 'Marina Costa',
+    role: 'Estratégia e briefing',
+    quote: 'Traduzimos a história do negócio em uma página clara, objetiva e pronta para converter.',
+    img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=85',
+  },
+  {
+    name: 'Rafael Lima',
+    role: 'Design e experiência',
+    quote: 'Cada seção precisa parecer bonita, mas principalmente ajudar o visitante a tomar uma decisão.',
+    img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=85',
+  },
+  {
+    name: 'Bianca Martins',
+    role: 'Copy e conversão',
+    quote: 'A oferta fica simples de entender, com menos ruído e mais motivo para chamar no WhatsApp.',
+    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85',
+  },
+  {
+    name: 'Lucas Rocha',
+    role: 'Publicação e suporte',
+    quote: 'Depois que o site vai ao ar, seguimos cuidando da parte técnica para o cliente focar no negócio.',
+    img: 'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=900&q=85',
+  },
+];
+
+type CtaConfig = {
+  primaryCtaHref: string;
+  primaryCtaLabel: string;
+  externalLinkProps: { target?: string; rel?: string };
+};
+
+function CompleteVideoSection({ cta }: { cta: CtaConfig }) {
+  return (
+    <section className="v2-section v2-complete-video" id="video">
+      <div className="v2-wrap v2-video-grid">
+        <Reveal className="v2-head v2-head-left">
+          <span className="v2-kicker">Apresentação</span>
+          <h2 className="v2-h2">Veja como tiramos seu site do papel em 48 horas.</h2>
+          <p className="v2-lead">
+            Uma visão direta do processo, do briefing até a publicação, para você entender
+            exatamente o que acontece antes de escolher um plano.
+          </p>
+          <a href={cta.primaryCtaHref} className="v2-btn v2-btn-primary" {...cta.externalLinkProps}>
+            {cta.primaryCtaLabel} <ArrowRight size={17} />
+          </a>
+        </Reveal>
+
+        <Reveal delay={120} className="v2-video-card">
+          {COMPLETE_VIDEO_URL ? (
+            <iframe
+              src={COMPLETE_VIDEO_URL}
+              title="Apresentação SiteRápido"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            />
+          ) : (
+            <div className="v2-video-placeholder">
+              <PlayCircle size={72} />
+              <span>Vídeo de apresentação</span>
+              <strong>Site pronto, seguro e publicado em 48h</strong>
+            </div>
+          )}
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function CompleteProofSection() {
+  return (
+    <section className="v2-section v2-proof-impact" id="prova-social">
+      <div className="v2-wrap">
+        <Reveal className="v2-head">
+          <span className="v2-kicker">Prova social</span>
+          <h2 className="v2-h2">Mais confiança antes do primeiro clique.</h2>
+          <p className="v2-lead">
+            A página é construída para responder objeções, valorizar sua marca e transformar
+            visitantes em conversas reais.
+          </p>
+        </Reveal>
+
+        <div className="v2-proof-grid">
+          <Reveal className="v2-proof-score">
+            <div className="v2-proof-stars">
+              {Array.from({ length: 5 }).map((_, i) => (
+                <Star key={i} size={18} />
+              ))}
+            </div>
+            <strong>Clientes chegam entendendo o valor antes de chamar.</strong>
+            <p>
+              "A página deixou nossa oferta mais clara. O WhatsApp passou a receber pessoas
+              mais decididas e com menos dúvidas básicas."
+            </p>
+            <span>Relato recorrente de clientes SiteRápido</span>
+          </Reveal>
+
+          <div className="v2-proof-metrics">
+            {socialProof.map((item, i) => (
+              <Reveal key={item.value} delay={i * 70} className="v2-proof-metric">
+                <span className="v2-proof-index">0{i + 1}</span>
+                <strong>{item.value}</strong>
+                <span>{item.label}</span>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CompleteAudienceSection() {
+  return (
+    <section className="v2-section v2-audience" id="para-quem">
+      <div className="v2-wrap">
+        <Reveal className="v2-head">
+          <span className="v2-kicker">Para quem é</span>
+          <h2 className="v2-h2">Feito para quem precisa vender confiança sem perder semanas.</h2>
+        </Reveal>
+        <div className="v2-audience-grid">
+          {audiences.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <Reveal key={item.title} delay={i * 90} className="v2-audience-card">
+                <span className="v2-audience-n">0{i + 1}</span>
+                <div className="v2-audience-icon">
+                  <Icon size={22} />
+                </div>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CompleteIncludedSection({ cta }: { cta: CtaConfig }) {
+  return (
+    <section className="v2-section v2-included" id="incluso">
+      <div className="v2-wrap v2-included-grid">
+        <Reveal className="v2-head v2-head-left">
+          <span className="v2-kicker">O que está incluso</span>
+          <h2 className="v2-h2">Tudo que seu site precisa para parecer profissional desde o primeiro dia.</h2>
+          <p className="v2-lead">
+            Você não precisa juntar freelancer, hospedagem, domínio e manutenção em contratos separados.
+          </p>
+          <a href={cta.primaryCtaHref} className="v2-btn v2-btn-ghost" {...cta.externalLinkProps}>
+            Ver melhor caminho <ArrowUpRight size={16} />
+          </a>
+        </Reveal>
+
+        <div className="v2-included-list">
+          {includedItems.map((item, i) => (
+            <Reveal key={item} delay={i * 55} className="v2-included-item">
+              <span className="v2-included-n">{String(i + 1).padStart(2, '0')}</span>
+              <span>{item}</span>
+              <Check size={17} />
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function CompleteAboutSection() {
+  const [activeMember, setActiveMember] = useState(0);
+  const member = teamMembers[activeMember];
+  const goToMember = (direction: -1 | 1) => {
+    setActiveMember((current) => (current + direction + teamMembers.length) % teamMembers.length);
+  };
+
+  return (
+    <section className="v2-section v2-about" id="quem-somos">
+      <div className="v2-wrap v2-about-grid">
+        <Reveal className="v2-head v2-head-left">
+          <span className="v2-kicker">Quem somos</span>
+          <h2 className="v2-h2">O time por trás do seu site em 48 horas.</h2>
+          <p className="v2-lead">
+            Estratégia, design, texto e publicação trabalhando juntos para transformar
+            uma ideia simples em uma presença digital confiável.
+          </p>
+        </Reveal>
+
+        <Reveal delay={120} className="v2-team-carousel">
+          <div className="v2-team-photo">
+            <img src={member.img} alt={`${member.name}, ${member.role}`} />
+          </div>
+          <div className="v2-team-copy">
+            <span>{member.role}</span>
+            <h3>{member.name}</h3>
+            <p>{member.quote}</p>
+          </div>
+          <div className="v2-team-controls">
+            <button type="button" onClick={() => goToMember(-1)} aria-label="Pessoa anterior">
+              <ChevronLeft size={18} />
+            </button>
+            <div className="v2-team-dots" aria-label="Selecionar pessoa do time">
+              {teamMembers.map((item, index) => (
+                <button
+                  key={item.name}
+                  type="button"
+                  className={activeMember === index ? 'is-active' : ''}
+                  onClick={() => setActiveMember(index)}
+                  aria-label={`Ver ${item.name}`}
+                />
+              ))}
+            </div>
+            <button type="button" onClick={() => goToMember(1)} aria-label="Próxima pessoa">
+              <ChevronRight size={18} />
+            </button>
+          </div>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+function CompleteGuaranteesSection() {
+  const items = [
+    { icon: ShieldCheck, title: 'Cancele quando quiser', text: 'A assinatura é simples e transparente, sem multa para sair.' },
+    { icon: Wrench, title: 'Manutenção inclusa', text: 'Ajustes, suporte e atualizações ficam dentro do plano escolhido.' },
+    { icon: BadgeCheck, title: 'Publicado com cuidado', text: 'Site seguro, responsivo, com SSL e preparado para receber visitas.' },
+  ];
+
+  return (
+    <section className="v2-section v2-guarantees" id="garantias">
+      <div className="v2-wrap">
+        <Reveal className="v2-head">
+          <span className="v2-kicker">Segurança</span>
+          <h2 className="v2-h2">Sem susto, sem taxa escondida, sem abandono depois da entrega.</h2>
+        </Reveal>
+        <div className="v2-guarantee-grid">
+          {items.map((item, i) => {
+            const Icon = item.icon;
+            return (
+              <Reveal key={item.title} delay={i * 80} className="v2-guarantee-card">
+                <div className="v2-guarantee-icon">
+                  <Icon size={22} />
+                </div>
+                <div>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
 
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
@@ -118,9 +411,10 @@ const WHATSAPP_URL =
 type LandingV2Props = {
   variant?: 'dark' | 'white';
   goal?: 'checkout' | 'whatsapp';
+  version?: 'standard' | 'complete';
 };
 
-export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Props) {
+export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'standard' }: LandingV2Props) {
   const [scrolled, setScrolled] = useState(false);
   const [annual, setAnnual] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -185,9 +479,11 @@ export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Prop
   const pricingCtaHref = isWhatsapp ? WHATSAPP_URL : '#contato';
   const finalCtaHref = isWhatsapp ? WHATSAPP_URL : '#planos';
   const finalCtaLabel = isWhatsapp ? 'Chamar no WhatsApp' : 'Começar agora';
+  const isComplete = version === 'complete';
+  const ctaConfig = { primaryCtaHref, primaryCtaLabel, externalLinkProps };
 
   return (
-    <div className={`v2 ${variant === 'white' ? 'v2-white' : ''}`}>
+    <div className={`v2 ${variant === 'white' ? 'v2-white' : ''} ${isComplete ? 'v2-complete' : ''}`}>
       <Cursor />
       <div className="v2-grain" aria-hidden />
 
@@ -198,6 +494,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Prop
             <Logo variant={variant} />
           </a>
           <nav className="v2-nav-links">
+            {isComplete && <a href="#video">Vídeo</a>}
             <a href="#metodo">Método</a>
             <a href="#modelos">Modelos</a>
             <a href="#planos">Planos</a>
@@ -233,6 +530,13 @@ export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Prop
         </div>
       </section>
 
+      {isComplete && (
+        <>
+          <CompleteVideoSection cta={ctaConfig} />
+          <CompleteProofSection />
+        </>
+      )}
+
       {/* ---------------- Comparison (scroll-driven) ---------------- */}
       <Comparison
         ctaHref={primaryCtaHref}
@@ -240,8 +544,12 @@ export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Prop
         ctaExternal={isWhatsapp}
       />
 
+      {isComplete && <CompleteAudienceSection />}
+
       {/* ---------------- Method (timeline) ---------------- */}
       <Method />
+
+      {isComplete && <CompleteIncludedSection cta={ctaConfig} />}
 
       {/* ---------------- Templates ---------------- */}
       <section className="v2-section" id="modelos">
@@ -299,6 +607,8 @@ export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Prop
 
       {/* ---------------- Testimonials (carousel) ---------------- */}
       <Testimonials />
+
+      {isComplete && <CompleteAboutSection />}
 
       {/* ---------------- Pricing ---------------- */}
       <section className="v2-section" id="planos">
@@ -378,6 +688,8 @@ export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Prop
           </div>
         </div>
       </section>
+
+      {isComplete && <CompleteGuaranteesSection />}
 
       {/* ---------------- FAQ ---------------- */}
       <section className="v2-section" id="faq">

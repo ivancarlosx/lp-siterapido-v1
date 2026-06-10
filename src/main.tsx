@@ -15,6 +15,10 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/v2-whatsapp" element={<LandingV2 goal="whatsapp" />} />
         <Route path="/v2-dark-whatsapp" element={<LandingV2 goal="whatsapp" />} />
         <Route path="/v2-white-whatsapp" element={<LandingV2 variant="white" goal="whatsapp" />} />
+        <Route path="/v2-completa" element={<LandingV2 version="complete" />} />
+        <Route path="/v2-completa-white" element={<LandingV2 variant="white" version="complete" />} />
+        <Route path="/v2-completa-whatsapp" element={<LandingV2 goal="whatsapp" version="complete" />} />
+        <Route path="/v2-completa-white-whatsapp" element={<LandingV2 variant="white" goal="whatsapp" version="complete" />} />
       </Routes>
     </BrowserRouter>
   </StrictMode>,
