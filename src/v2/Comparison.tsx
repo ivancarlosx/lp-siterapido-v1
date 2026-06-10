@@ -6,8 +6,19 @@ import './comparison.css';
 /* Scroll-driven comparison: progress is tied to where the CARDS sit in the
    viewport, so the 3D tilt/raise plays exactly while the cards are on screen
    (staggered), and the winner's glow grows. Continuous with scroll position. */
-export function Comparison() {
+type ComparisonProps = {
+  ctaHref?: string;
+  ctaLabel?: string;
+  ctaExternal?: boolean;
+};
+
+export function Comparison({
+  ctaHref = '#planos',
+  ctaLabel = 'Escolher este método',
+  ctaExternal = false,
+}: ComparisonProps) {
   const ref = useRef<HTMLElement>(null);
+  const ctaLinkProps = ctaExternal ? { target: '_blank', rel: 'noreferrer' } : {};
 
   useEffect(() => {
     const el = ref.current;
@@ -80,8 +91,8 @@ export function Comparison() {
               <li><Check size={17} /> <span><strong>Entrega em 48h.</strong> Profissional e focado em converter.</span></li>
               <li><Check size={17} /> <span><strong>Tudo em uma assinatura.</strong> Hospedagem, suporte e manutenção.</span></li>
             </ul>
-            <a href="#planos" className="v2-btn v2-btn-primary v2-btn-full">
-              Escolher este método <ArrowRight size={16} />
+            <a href={ctaHref} className="v2-btn v2-btn-primary v2-btn-full" {...ctaLinkProps}>
+              {ctaLabel} <ArrowRight size={16} />
             </a>
           </div>
         </div>

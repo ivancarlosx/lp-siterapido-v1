@@ -106,14 +106,21 @@ const faqs = [
   },
 ];
 
+const WHATSAPP_MESSAGE =
+  'Olá! Quero criar meu site com a SiteRápido. Pode me ajudar?';
+const WHATSAPP_URL =
+  import.meta.env.VITE_WHATSAPP_URL ||
+  `https://wa.me/?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+
 /* ------------------------------------------------------------------ */
 /*  Page                                                               */
 /* ------------------------------------------------------------------ */
 type LandingV2Props = {
   variant?: 'dark' | 'white';
+  goal?: 'checkout' | 'whatsapp';
 };
 
-export function LandingV2({ variant = 'dark' }: LandingV2Props) {
+export function LandingV2({ variant = 'dark', goal = 'checkout' }: LandingV2Props) {
   const [scrolled, setScrolled] = useState(false);
   const [annual, setAnnual] = useState(true);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
@@ -171,6 +178,13 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
     (i: number) => setOpenFaq((cur) => (cur === i ? null : i)),
     []
   );
+  const isWhatsapp = goal === 'whatsapp';
+  const externalLinkProps = isWhatsapp ? { target: '_blank', rel: 'noreferrer' } : {};
+  const primaryCtaHref = isWhatsapp ? WHATSAPP_URL : '#planos';
+  const primaryCtaLabel = isWhatsapp ? 'Falar no WhatsApp' : 'Quero meu site';
+  const pricingCtaHref = isWhatsapp ? WHATSAPP_URL : '#contato';
+  const finalCtaHref = isWhatsapp ? WHATSAPP_URL : '#planos';
+  const finalCtaLabel = isWhatsapp ? 'Chamar no WhatsApp' : 'Começar agora';
 
   return (
     <div className={`v2 ${variant === 'white' ? 'v2-white' : ''}`}>
@@ -189,14 +203,18 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
             <a href="#planos">Planos</a>
             <a href="#faq">FAQ</a>
           </nav>
-          <a href="#contato" className="v2-btn v2-btn-ghost v2-nav-cta">
+          <a href={isWhatsapp ? WHATSAPP_URL : '#contato'} className="v2-btn v2-btn-ghost v2-nav-cta" {...externalLinkProps}>
             Falar agora <ArrowUpRight size={15} />
           </a>
         </div>
       </header>
 
       {/* ---------------- Hero ---------------- */}
-      <HeroA />
+      <HeroA
+        primaryHref={primaryCtaHref}
+        primaryLabel={primaryCtaLabel}
+        primaryExternal={isWhatsapp}
+      />
 
       {/* ---------------- Stat band ---------------- */}
       <section className="v2-stats">
@@ -216,7 +234,11 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
       </section>
 
       {/* ---------------- Comparison (scroll-driven) ---------------- */}
-      <Comparison />
+      <Comparison
+        ctaHref={primaryCtaHref}
+        ctaLabel={isWhatsapp ? 'Conversar no WhatsApp' : 'Escolher este método'}
+        ctaExternal={isWhatsapp}
+      />
 
       {/* ---------------- Method (timeline) ---------------- */}
       <Method />
@@ -323,7 +345,9 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
                 <li><Check size={16} /> 1 edição gratuita por mês</li>
                 <li><Check size={16} /> Suporte via e-mail</li>
               </ul>
-              <a href="#contato" className="v2-btn v2-btn-ghost v2-btn-full">Assinar Essencial</a>
+              <a href={pricingCtaHref} className="v2-btn v2-btn-ghost v2-btn-full" {...externalLinkProps}>
+                {isWhatsapp ? 'Falar sobre Essencial' : 'Assinar Essencial'}
+              </a>
             </Reveal>
 
             <Reveal delay={100} className="v2-plan v2-plan-featured">
@@ -347,7 +371,9 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
                 <li><Check size={16} /> Hospedagem de alta velocidade</li>
                 <li><Check size={16} /> SSL, SEO e WhatsApp inclusos</li>
               </ul>
-              <a href="#contato" className="v2-btn v2-btn-primary v2-btn-full">Assinar Profissional</a>
+              <a href={pricingCtaHref} className="v2-btn v2-btn-primary v2-btn-full" {...externalLinkProps}>
+                {isWhatsapp ? 'Falar sobre Profissional' : 'Assinar Profissional'}
+              </a>
             </Reveal>
           </div>
         </div>
@@ -360,7 +386,7 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
             <span className="v2-kicker">FAQ</span>
             <h2 className="v2-h2">Perguntas frequentes.</h2>
             <p className="v2-lead">Ainda com dúvidas? Falamos pelo WhatsApp a qualquer momento.</p>
-            <a href="#contato" className="v2-btn v2-btn-ghost">
+            <a href={isWhatsapp ? WHATSAPP_URL : '#contato'} className="v2-btn v2-btn-ghost" {...externalLinkProps}>
               <MessageCircle size={16} /> Falar com consultor
             </a>
           </Reveal>
@@ -400,10 +426,10 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
             <h2>Pronto para ter seu site no ar em 48h?</h2>
             <p>Sem custo de criação. Sem dor de cabeça. Só resultado.</p>
             <div className="v2-cta-actions">
-              <a href="#planos" className="v2-btn v2-btn-primary v2-btn-lg">
-                Começar agora <ArrowRight size={18} />
+              <a href={finalCtaHref} className="v2-btn v2-btn-primary v2-btn-lg" {...externalLinkProps}>
+                {finalCtaLabel} <ArrowRight size={18} />
               </a>
-              <a href="#" className="v2-btn v2-btn-ghost v2-btn-lg">
+              <a href={WHATSAPP_URL} className="v2-btn v2-btn-ghost v2-btn-lg" target="_blank" rel="noreferrer">
                 <MessageCircle size={17} /> Falar no WhatsApp
               </a>
             </div>
@@ -440,7 +466,7 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
             </div>
             <div>
               <h5>Contato</h5>
-              <a href="#contato">Falar com consultor</a>
+              <a href={isWhatsapp ? WHATSAPP_URL : '#contato'} {...externalLinkProps}>Falar com consultor</a>
               <a href="#">contato@siterapido.com</a>
             </div>
           </div>
@@ -489,8 +515,13 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
                 <strong>Gostou desse modelo?</strong>
                 <p>Personalizamos com a sua marca, cores e textos.</p>
               </div>
-              <a href="#planos" className="v2-btn v2-btn-primary" onClick={() => setSelectedTpl(null)}>
-                Quero esse modelo <ArrowRight size={16} />
+              <a
+                href={primaryCtaHref}
+                className="v2-btn v2-btn-primary"
+                onClick={() => setSelectedTpl(null)}
+                {...externalLinkProps}
+              >
+                {isWhatsapp ? 'Falar sobre este modelo' : 'Quero esse modelo'} <ArrowRight size={16} />
               </a>
             </div>
           </div>
@@ -498,7 +529,7 @@ export function LandingV2({ variant = 'dark' }: LandingV2Props) {
       )}
 
       {/* Floating WhatsApp */}
-      <a href="#contato" className="v2-wa" aria-label="Falar no WhatsApp">
+      <a href={WHATSAPP_URL} className="v2-wa" aria-label="Falar no WhatsApp" target="_blank" rel="noreferrer">
         <MessageCircle size={24} />
       </a>
     </div>

@@ -50,8 +50,19 @@ function Mockup({ compact = false }: { compact?: boolean }) {
 /* ================================================================== */
 /*  HERO A — Editorial centralizado (refinado, mockup mais próximo)    */
 /* ================================================================== */
-export function HeroA() {
+type HeroCtaProps = {
+  primaryHref?: string;
+  primaryLabel?: string;
+  primaryExternal?: boolean;
+};
+
+export function HeroA({
+  primaryHref = '#planos',
+  primaryLabel = 'Quero meu site',
+  primaryExternal = false,
+}: HeroCtaProps) {
   const ref = useRef<HTMLElement>(null);
+  const primaryLinkProps = primaryExternal ? { target: '_blank', rel: 'noreferrer' } : {};
 
   useEffect(() => {
     const el = ref.current;
@@ -94,8 +105,8 @@ export function HeroA() {
         </Reveal>
 
         <Reveal delay={240} className="v2-hero-ctas">
-          <a href="#planos" className="v2-btn v2-btn-primary">
-            Quero meu site <ArrowRight size={17} />
+          <a href={primaryHref} className="v2-btn v2-btn-primary" {...primaryLinkProps}>
+            {primaryLabel} <ArrowRight size={17} />
           </a>
           <a href="#metodo" className="v2-btn v2-btn-ghost">Ver como funciona</a>
         </Reveal>
