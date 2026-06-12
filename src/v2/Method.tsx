@@ -1,24 +1,31 @@
+import { ArrowRight, CheckCircle2 } from 'lucide-react';
 import { Reveal } from './Reveal';
 import './method.css';
 
 const steps = [
   {
     n: '01',
-    title: 'Briefing rápido',
-    text: 'Você assina o plano e preenche um formulário de 5 minutos com logo, cores e informações do seu negócio.',
-    dur: '5 min',
+    title: 'Escolha o plano',
+    text: 'Você seleciona a assinatura mensal, escolhe o modelo que combina com o negócio e confirma o início.',
+    dur: 'Hoje',
   },
   {
     n: '02',
-    title: 'Produção em 48h',
-    text: 'Nossa equipe cria o design, escreve os textos focados em conversão e monta o site inteiro por você.',
-    dur: '48 horas',
+    title: 'Envie o briefing',
+    text: 'Recebemos logo, cores, fotos, contatos e as informações principais em um formulário simples.',
+    dur: '5 min',
   },
   {
     n: '03',
-    title: 'Lançamento e suporte',
-    text: 'Com o seu "ok", o site vai ao ar. A partir daí cuidamos da manutenção, atualizações e suporte.',
-    dur: 'Contínuo',
+    title: 'Montamos seu site',
+    text: 'Nossa equipe adapta o template, organiza os textos, configura os botões e prepara tudo para aprovação.',
+    dur: 'Até 48h',
+  },
+  {
+    n: '04',
+    title: 'Publicamos e cuidamos',
+    text: 'Depois do seu ok, colocamos o site no ar e seguimos com hospedagem, suporte e atualizações.',
+    dur: 'Sempre',
   },
 ];
 
@@ -28,29 +35,25 @@ export function Method() {
       <div className="v2-wrap">
         <Reveal className="v2-head">
           <span className="v2-kicker">Como funciona</span>
-          <h2 className="v2-h2">Do briefing ao ar, em três passos.</h2>
+          <h2 className="v2-h2">Um caminho simples até seu site publicado.</h2>
         </Reveal>
 
-        <div className="v2-timeline">
-          <div className="v2-tl-axis" aria-hidden>
-            <span className="v2-tl-ruler" />
-          </div>
-          <div className="v2-tl-grid">
-            {steps.map((s, i) => (
-              <Reveal key={s.n} delay={i * 120} className="v2-tl-step">
-                <div className="v2-tl-content">
-                  <span className="v2-tl-n">{s.n}</span>
+        <div className="v2-process">
+          {steps.map((s, i) => (
+            <Reveal key={s.n} delay={i * 100} className="v2-process-step">
+              <div className="v2-process-marker">
+                <span>{s.n}</span>
+                {i < steps.length - 1 ? <ArrowRight size={18} /> : <CheckCircle2 size={18} />}
+              </div>
+              <div className="v2-process-copy">
+                <div>
                   <h3>{s.title}</h3>
                   <p>{s.text}</p>
                 </div>
-                <span className="v2-tl-line" />
-                <span className="v2-tl-pill">
-                  <i className="v2-tl-sq" />
-                  {s.dur}
-                </span>
-              </Reveal>
-            ))}
-          </div>
+                <strong>{s.dur}</strong>
+              </div>
+            </Reveal>
+          ))}
         </div>
       </div>
     </section>

@@ -10,9 +10,10 @@ import './heroes.css';
 function Headline() {
   return (
     <>
-      Sites profissionais,
+      Seu site no ar
       <br />
-      <em>sem custo de criação.</em>
+      {' '}
+      <em>em 48h</em>
     </>
   );
 }
