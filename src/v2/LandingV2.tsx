@@ -86,10 +86,42 @@ function AnimatedNumber({ value }: { value: string }) {
 /* ------------------------------------------------------------------ */
 
 const templates = [
-  { title: 'Consultório Odontológico', cat: 'Dentista', img: 'https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Clínica de Fisioterapia', cat: 'Fisioterapia', img: 'https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Academia & Cross', cat: 'Academia', img: 'https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=800&q=80' },
-  { title: 'Espaço de Psicologia', cat: 'Psicologia', img: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=800&q=80' },
+  {
+    title: 'Psicologia acolhedora',
+    cat: 'Psicologia',
+    img: '/template-previews/psicologia.png',
+    url: 'https://psicologia-landing-six.vercel.app/',
+  },
+  {
+    title: 'Nutricionista premium',
+    cat: 'Nutricionista',
+    img: '/template-previews/nutricionista.png',
+    url: 'https://site-nutricionista-henna.vercel.app/',
+  },
+  {
+    title: 'Bella Estética',
+    cat: 'Estética',
+    img: '/template-previews/estetica.png',
+    url: 'https://bella-estetica-eight.vercel.app/',
+  },
+  {
+    title: 'Infoprodutor V6',
+    cat: 'Infoprodutor',
+    img: '/template-previews/infoprodutor-v6.png',
+    url: 'https://lp-infoprodutor-v6.vercel.app/',
+  },
+  {
+    title: 'Infoprodutor V5',
+    cat: 'Infoprodutor',
+    img: '/template-previews/infoprodutor-v5.png',
+    url: 'https://lp-infoprodutor-v5.vercel.app/',
+  },
+  {
+    title: 'Clínica odontológica',
+    cat: 'Dentista',
+    img: '/template-previews/dentista.png',
+    url: 'https://dentista-01-beta.vercel.app/',
+  },
 ];
 
 
@@ -464,7 +496,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
     };
   }, [selectedTpl]);
 
-  const cats = ['Todos', 'Dentista', 'Fisioterapia', 'Academia', 'Psicologia'];
+  const cats = ['Todos', 'Psicologia', 'Nutricionista', 'Estética', 'Infoprodutor', 'Dentista'];
   const visibleTemplates =
     activeCat === 'Todos' ? templates : templates.filter((t) => t.cat === activeCat);
 
@@ -799,55 +831,35 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
             <div className="v2-modal-bar">
               <span /><span /><span />
               <div className="v2-modal-url">
-                {selectedTpl.title.toLowerCase().replace(/[^a-z0-9]+/g, '')}.siterapido.me
+                {selectedTpl.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
               </div>
             </div>
-            <div className="v2-modal-scroll">
-              <div className="v2-modal-hero" style={{ backgroundImage: `url(${selectedTpl.img})` }}>
-                <span className="v2-modal-cat">{selectedTpl.cat}</span>
-                <h3>{selectedTpl.title}</h3>
-                <span className="v2-modal-fakebtn">Agendar agora</span>
-              </div>
-              <div className="v2-modal-section">
-                <span className="v2-modal-eyebrow">Template pronto para adaptar</span>
-                <h4>Uma estrutura completa para {selectedTpl.cat.toLowerCase()}</h4>
-                <p>
-                  Hero, apresentação dos serviços, diferenciais e chamada direta para contato já organizados
-                  para receber sua marca, fotos e textos.
-                </p>
-                <div className="v2-modal-cards">
-                  {['Serviços', 'Provas', 'Contato'].map((item) => (
-                    <div className="v2-modal-mini-card" key={item}>
-                      <strong>{item}</strong>
-                      <span />
-                      <span />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="v2-modal-section">
-                <span className="v2-modal-eyebrow">O que entra no seu site</span>
-                <div className="v2-modal-list">
-                  <span>Design responsivo</span>
-                  <span>Textos focados em conversão</span>
-                  <span>Botões de WhatsApp ou checkout</span>
-                  <span>Publicação em até 48h após o briefing</span>
-                </div>
-              </div>
+            <div className="v2-modal-browser">
+              <iframe
+                src={selectedTpl.url}
+                title={`Modelo ${selectedTpl.title}`}
+                loading="lazy"
+                sandbox="allow-same-origin allow-scripts allow-forms allow-popups allow-popups-to-escape-sandbox"
+              />
             </div>
             <div className="v2-modal-cta">
               <div>
                 <strong>Gostou desse modelo?</strong>
                 <p>Personalizamos com a sua marca, cores e textos.</p>
               </div>
-              <a
-                href={primaryCtaHref}
-                className="v2-btn v2-btn-primary"
-                onClick={() => setSelectedTpl(null)}
-                {...externalLinkProps}
-              >
-                {isWhatsapp ? 'Falar sobre este modelo' : 'Quero esse modelo'} <ArrowRight size={16} />
-              </a>
+              <div className="v2-modal-actions">
+                <a href={selectedTpl.url} className="v2-btn v2-btn-ghost" target="_blank" rel="noreferrer">
+                  Abrir modelo <ArrowUpRight size={16} />
+                </a>
+                <a
+                  href={primaryCtaHref}
+                  className="v2-btn v2-btn-primary"
+                  onClick={() => setSelectedTpl(null)}
+                  {...externalLinkProps}
+                >
+                  {isWhatsapp ? 'Falar sobre este modelo' : 'Quero esse modelo'} <ArrowRight size={16} />
+                </a>
+              </div>
             </div>
           </div>
         </div>
