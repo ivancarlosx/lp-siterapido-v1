@@ -988,7 +988,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 40px;
+  padding: 20px;
   background: rgba(4, 5, 6, 0.72);
   backdrop-filter: blur(8px);
   animation: v2-modal-fade 0.25s var(--v2-ease);
@@ -997,8 +997,8 @@
 
 .v2-modal-close {
   position: absolute;
-  top: 52px;
-  right: 52px;
+  top: 32px;
+  right: 32px;
   z-index: 2;
   width: 42px;
   height: 42px;
@@ -1013,8 +1013,8 @@
 .v2-modal-close:hover { background: rgba(255, 255, 255, 0.12); transform: rotate(90deg); }
 
 .v2-modal-card {
-  width: calc(100vw - 80px);
-  height: calc(100vh - 80px);
+  width: calc(100vw - 40px);
+  height: calc(100vh - 40px);
   max-width: none;
   max-height: none;
   display: flex;

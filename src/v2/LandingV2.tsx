@@ -482,7 +482,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
   const primaryCtaLabel = isWhatsapp ? 'Falar no WhatsApp' : 'Quero meu site';
   const pricingCtaHref = isWhatsapp ? WHATSAPP_URL : '#contato';
   const finalCtaHref = isWhatsapp ? WHATSAPP_URL : '#planos';
-  const finalCtaLabel = isWhatsapp ? 'Chamar no WhatsApp' : 'Começar agora';
+  const finalCtaLabel = isWhatsapp ? 'Chamar no WhatsApp' : 'Quero meu site';
   const isComplete = version === 'complete';
   const ctaConfig = { primaryCtaHref, primaryCtaLabel, externalLinkProps };
   const navLinks = [
@@ -691,7 +691,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
                 <li><Check size={16} /> Suporte via e-mail</li>
               </ul>
               <a href={pricingCtaHref} className="v2-btn v2-btn-ghost v2-btn-full" {...externalLinkProps}>
-                {isWhatsapp ? 'Falar sobre Essencial' : 'Assinar Essencial'}
+                {isWhatsapp ? 'Falar sobre Essencial' : 'Quero meu site'}
               </a>
             </Reveal>
 
@@ -717,7 +717,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
                 <li><Check size={16} /> {isWhatsapp ? 'SSL, SEO e WhatsApp inclusos' : 'SSL, SEO e checkout inclusos'}</li>
               </ul>
               <a href={pricingCtaHref} className="v2-btn v2-btn-primary v2-btn-full" {...externalLinkProps}>
-                {isWhatsapp ? 'Falar sobre Profissional' : 'Assinar Profissional'}
+                {isWhatsapp ? 'Falar sobre Profissional' : 'Quero meu site'}
               </a>
             </Reveal>
           </div>
@@ -812,7 +812,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
             <div>
               <h5>Contato</h5>
               <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp</a>
-              <a href="#">contato@siterapido.com</a>
+              <a href="mailto:contato@siterapido.me">contato@siterapido.me</a>
             </div>
           </div>
         </div>
@@ -829,12 +829,6 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
             <X size={20} />
           </button>
           <div className="v2-modal-card" onClick={(e) => e.stopPropagation()}>
-            <div className="v2-modal-bar">
-              <span /><span /><span />
-              <div className="v2-modal-url">
-                {selectedTpl.url.replace(/^https?:\/\//, '').replace(/\/$/, '')}
-              </div>
-            </div>
             <div className="v2-modal-browser">
               <iframe
                 src={selectedTpl.url}
@@ -849,16 +843,13 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
                 <p>Personalizamos com a sua marca, cores e textos.</p>
               </div>
               <div className="v2-modal-actions">
-                <a href={selectedTpl.url} className="v2-btn v2-btn-ghost" target="_blank" rel="noreferrer">
-                  Abrir modelo <ArrowUpRight size={16} />
-                </a>
                 <a
                   href={primaryCtaHref}
                   className="v2-btn v2-btn-primary"
                   onClick={() => setSelectedTpl(null)}
                   {...externalLinkProps}
                 >
-                  {isWhatsapp ? 'Falar sobre este modelo' : 'Quero esse modelo'} <ArrowRight size={16} />
+                  {isWhatsapp ? 'Falar sobre este modelo' : 'Quero meu site'} <ArrowRight size={16} />
                 </a>
               </div>
             </div>
