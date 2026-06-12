@@ -165,7 +165,7 @@
 }
 .v2-site-bar i { width: 6px; height: 6px; border-radius: 50%; background: rgba(255, 255, 255, 0.25); }
 .v2-site-shot img {
-  width: 100%; height: 100%; object-fit: cover;
+  width: 100%; height: 100%; object-fit: cover; object-position: top center;
   filter: grayscale(0.25) brightness(0.82);
   transition: transform 0.5s var(--v2-ease), filter 0.4s var(--v2-ease);
 }

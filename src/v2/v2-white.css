@@ -34,6 +34,11 @@
   box-shadow: 0 14px 40px -32px rgba(17, 23, 12, 0.36);
 }
 
+.v2-white .v2-nav.is-menu-open {
+  background: rgba(251, 252, 247, 0.92);
+  box-shadow: 0 14px 40px -32px rgba(17, 23, 12, 0.36);
+}
+
 .v2-white .v2-btn-primary {
   color: #11170c;
   box-shadow: 0 12px 26px -18px rgba(108, 169, 16, 0.7);

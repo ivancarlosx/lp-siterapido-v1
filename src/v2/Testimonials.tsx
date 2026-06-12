@@ -53,9 +53,22 @@ const items: Item[] = [
   },
 ];
 
-export function Testimonials() {
+export function Testimonials({ isWhatsapp = true }: { isWhatsapp?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [video, setVideo] = useState<Extract<Item, { type: 'video' }> | null>(null);
+  const displayItems = items.map((item) => {
+    if (isWhatsapp) return item;
+    if (item.name === 'Camila Duarte' && item.type === 'video') {
+      return { ...item, quote: 'Triplicou meus pedidos pelo site.' };
+    }
+    if (item.name === 'Gustavo Mendes' && item.type === 'text') {
+      return {
+        ...item,
+        content: 'Fizemos o briefing e em 2 dias o site estava rodando. Hoje recebo muito mais contatos pelo site.',
+      };
+    }
+    return item;
+  });
 
   const scrollByCards = (dir: number) => {
     const track = trackRef.current;
@@ -85,7 +98,7 @@ export function Testimonials() {
 
       <div className="v2-tt-track" ref={trackRef}>
         <div className="v2-tt-pad" aria-hidden />
-        {items.map((t, i) =>
+        {displayItems.map((t, i) =>
           t.type === 'text' ? (
             <article className="v2-tcard v2-tcard-text" key={i}>
               <Quote className="v2-tcard-q" size={34} />

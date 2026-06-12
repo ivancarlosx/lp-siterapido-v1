@@ -18,6 +18,7 @@ import {
   Users,
   Wrench,
   X,
+  Menu,
 } from 'lucide-react';
 import { Reveal } from './Reveal';
 import { HeroA } from './Heroes';
@@ -26,6 +27,7 @@ import { Method } from './Method';
 import { Testimonials } from './Testimonials';
 import { Cursor } from './Cursor';
 import { Logo } from './Logo';
+import { templates } from './templateData';
 import { initLenis, destroyLenis, lenisStop, lenisStart } from './lenis';
 import 'lenis/dist/lenis.css';
 import './v2.css';
@@ -81,50 +83,6 @@ function AnimatedNumber({ value }: { value: string }) {
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Data                                                               */
-/* ------------------------------------------------------------------ */
-
-const templates = [
-  {
-    title: 'Psicologia acolhedora',
-    cat: 'Psicologia',
-    img: '/template-previews/psicologia.png',
-    url: 'https://psicologia-landing-six.vercel.app/',
-  },
-  {
-    title: 'Nutricionista premium',
-    cat: 'Nutricionista',
-    img: '/template-previews/nutricionista.png',
-    url: 'https://site-nutricionista-henna.vercel.app/',
-  },
-  {
-    title: 'Bella Estética',
-    cat: 'Estética',
-    img: '/template-previews/estetica.png',
-    url: 'https://bella-estetica-eight.vercel.app/',
-  },
-  {
-    title: 'Infoprodutor V6',
-    cat: 'Infoprodutor',
-    img: '/template-previews/infoprodutor-v6.png',
-    url: 'https://lp-infoprodutor-v6.vercel.app/',
-  },
-  {
-    title: 'Infoprodutor V5',
-    cat: 'Infoprodutor',
-    img: '/template-previews/infoprodutor-v5.png',
-    url: 'https://lp-infoprodutor-v5.vercel.app/',
-  },
-  {
-    title: 'Clínica odontológica',
-    cat: 'Dentista',
-    img: '/template-previews/dentista.png',
-    url: 'https://dentista-01-beta.vercel.app/',
-  },
-];
-
-
 const faqs = [
   {
     q: 'A criação do site é realmente grátis?',
@@ -162,45 +120,36 @@ const socialProof = [
   { value: '4.9/5', label: 'média de satisfação no atendimento' },
 ];
 
-const audiences = [
-  { icon: Target, title: 'Profissionais liberais', text: 'Dentistas, psicólogos, fisioterapeutas e consultores que precisam gerar confiança rápido.' },
-  { icon: Users, title: 'Negócios locais', text: 'Clínicas, academias, salões e serviços que dependem de agenda, WhatsApp e indicação.' },
-  { icon: Globe2, title: 'Marcas começando', text: 'Empresas que querem sair do improviso sem investir milhares no primeiro site.' },
-];
-
-const includedItems = [
-  'Design profissional personalizado',
-  'Hospedagem rápida e segura',
-  'SSL, SEO básico e performance',
-  'Botões e integração com WhatsApp',
-  'Domínio grátis no plano Profissional',
-  'Manutenção e edições mensais',
-];
-
 const teamMembers = [
   {
-    name: 'Marina Costa',
-    role: 'Estratégia e briefing',
-    quote: 'Traduzimos a história do negócio em uma página clara, objetiva e pronta para converter.',
-    img: 'https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=900&q=85',
+    name: 'Guilherme Campelo',
+    role: 'Founder e Diretor',
+    quote: 'Estratégia, posicionamento e direção criativa para construir marcas mais fortes e sites com presença profissional.',
+    img: '/mais-connecta-team/guilherme.jpg',
   },
   {
-    name: 'Rafael Lima',
-    role: 'Design e experiência',
-    quote: 'Cada seção precisa parecer bonita, mas principalmente ajudar o visitante a tomar uma decisão.',
-    img: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?auto=format&fit=crop&w=900&q=85',
+    name: 'Bianca Pereira',
+    role: 'Customer Success',
+    quote: 'Acompanha cada etapa para garantir clareza, alinhamento e uma entrega que faça sentido para o negócio.',
+    img: '/mais-connecta-team/bianca.jpg',
   },
   {
-    name: 'Bianca Martins',
-    role: 'Copy e conversão',
-    quote: 'A oferta fica simples de entender, com menos ruído e mais motivo para chamar no WhatsApp.',
-    img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=900&q=85',
+    name: 'William Gabriel',
+    role: 'Designer',
+    quote: 'Transforma a identidade visual em interfaces bonitas, objetivas e preparadas para gerar confiança.',
+    img: '/mais-connecta-team/william.jpg',
   },
   {
-    name: 'Lucas Rocha',
-    role: 'Publicação e suporte',
-    quote: 'Depois que o site vai ao ar, seguimos cuidando da parte técnica para o cliente focar no negócio.',
-    img: 'https://images.unsplash.com/photo-1531891437562-4301cf35b7e4?auto=format&fit=crop&w=900&q=85',
+    name: 'Ivan Carlos',
+    role: 'Designer',
+    quote: 'Cuida da experiência visual para deixar cada página clara, moderna e pronta para apresentar sua marca.',
+    img: '/mais-connecta-team/ivan.jpg',
+  },
+  {
+    name: 'Johnson Santos',
+    role: 'Gestor Tráfego',
+    quote: 'Conecta a página aos canais certos para atrair visitantes qualificados e transformar atenção em oportunidade.',
+    img: '/mais-connecta-team/johnson.jpg',
   },
 ];
 
@@ -247,7 +196,7 @@ function CompleteVideoSection({ cta }: { cta: CtaConfig }) {
   );
 }
 
-function CompleteProofSection() {
+function CompleteProofSection({ isWhatsapp }: { isWhatsapp: boolean }) {
   return (
     <section className="v2-section v2-proof-impact" id="prova-social">
       <div className="v2-wrap">
@@ -269,8 +218,9 @@ function CompleteProofSection() {
             </div>
             <strong>Clientes chegam entendendo o valor antes de chamar.</strong>
             <p>
-              "A página deixou nossa oferta mais clara. O WhatsApp passou a receber pessoas
-              mais decididas e com menos dúvidas básicas."
+              {isWhatsapp
+                ? '"A página deixou nossa oferta mais clara. O WhatsApp passou a receber pessoas mais decididas e com menos dúvidas básicas."'
+                : '"A página deixou nossa oferta mais clara. Os visitantes chegam mais decididos e com menos dúvidas básicas."'}
             </p>
             <span>Relato recorrente de clientes SiteRápido</span>
           </Reveal>
@@ -290,7 +240,19 @@ function CompleteProofSection() {
   );
 }
 
-function CompleteAudienceSection() {
+function CompleteAudienceSection({ isWhatsapp }: { isWhatsapp: boolean }) {
+  const audiences = [
+    { icon: Target, title: 'Profissionais liberais', text: 'Dentistas, psicólogos, fisioterapeutas e consultores que precisam gerar confiança rápido.' },
+    {
+      icon: Users,
+      title: 'Negócios locais',
+      text: isWhatsapp
+        ? 'Clínicas, academias, salões e serviços que dependem de agenda, WhatsApp e indicação.'
+        : 'Clínicas, academias, salões e serviços que dependem de agenda, contato e indicação.',
+    },
+    { icon: Globe2, title: 'Marcas começando', text: 'Empresas que querem sair do improviso sem investir milhares no primeiro site.' },
+  ];
+
   return (
     <section className="v2-section v2-audience" id="para-quem">
       <div className="v2-wrap">
@@ -320,7 +282,16 @@ function CompleteAudienceSection() {
   );
 }
 
-function CompleteIncludedSection({ cta }: { cta: CtaConfig }) {
+function CompleteIncludedSection({ cta, isWhatsapp }: { cta: CtaConfig; isWhatsapp: boolean }) {
+  const includedItems = [
+    'Design profissional personalizado',
+    'Hospedagem rápida e segura',
+    'SSL, SEO básico e performance',
+    isWhatsapp ? 'Botões e integração com WhatsApp' : 'Botões e integração com checkout',
+    'Domínio grátis no plano Profissional',
+    'Manutenção e edições mensais',
+  ];
+
   return (
     <section className="v2-section v2-included" id="incluso">
       <div className="v2-wrap v2-included-grid">
@@ -452,6 +423,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeCat, setActiveCat] = useState('Todos');
   const [selectedTpl, setSelectedTpl] = useState<(typeof templates)[number] | null>(null);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const ctaRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -513,6 +485,13 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
   const finalCtaLabel = isWhatsapp ? 'Chamar no WhatsApp' : 'Começar agora';
   const isComplete = version === 'complete';
   const ctaConfig = { primaryCtaHref, primaryCtaLabel, externalLinkProps };
+  const navLinks = [
+    ...(isComplete ? [{ href: '#video', label: 'Vídeo' }, { href: '#quem-somos', label: 'Quem somos' }] : []),
+    { href: '#metodo', label: 'Método' },
+    { href: '#modelos', label: 'Modelos' },
+    { href: '#planos', label: 'Planos' },
+    { href: '#faq', label: 'FAQ' },
+  ];
 
   return (
     <div className={`v2 ${variant === 'white' ? 'v2-white' : ''} ${isComplete ? 'v2-complete' : ''}`}>
@@ -520,21 +499,45 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
       <div className="v2-grain" aria-hidden />
 
       {/* ---------------- Nav ---------------- */}
-      <header className={`v2-nav ${scrolled ? 'is-scrolled' : ''}`}>
+      <header className={`v2-nav ${scrolled ? 'is-scrolled' : ''} ${mobileMenuOpen ? 'is-menu-open' : ''}`}>
         <div className="v2-wrap v2-nav-inner">
           <a href="#top" className="v2-logo">
             <Logo variant={variant} />
           </a>
           <nav className="v2-nav-links">
-            {isComplete && <a href="#video">Vídeo</a>}
-            <a href="#metodo">Método</a>
-            <a href="#modelos">Modelos</a>
-            <a href="#planos">Planos</a>
-            <a href="#faq">FAQ</a>
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href}>{link.label}</a>
+            ))}
           </nav>
           <a href={isWhatsapp ? WHATSAPP_URL : '#contato'} className="v2-btn v2-btn-ghost v2-nav-cta" {...externalLinkProps}>
             Falar agora <ArrowUpRight size={15} />
           </a>
+          <button
+            type="button"
+            className="v2-mobile-menu-btn"
+            onClick={() => setMobileMenuOpen((open) => !open)}
+            aria-label={mobileMenuOpen ? 'Fechar menu' : 'Abrir menu'}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? <X size={19} /> : <Menu size={19} />}
+          </button>
+        </div>
+        <div className={`v2-mobile-menu ${mobileMenuOpen ? 'is-open' : ''}`}>
+          <div className="v2-wrap v2-mobile-menu-inner">
+            {navLinks.map((link) => (
+              <a key={link.href} href={link.href} onClick={() => setMobileMenuOpen(false)}>
+                {link.label}
+              </a>
+            ))}
+            <a
+              href={isWhatsapp ? WHATSAPP_URL : '#contato'}
+              className="v2-btn v2-btn-primary"
+              onClick={() => setMobileMenuOpen(false)}
+              {...externalLinkProps}
+            >
+              Falar agora <ArrowUpRight size={15} />
+            </a>
+          </div>
         </div>
       </header>
 
@@ -565,7 +568,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
       {isComplete && (
         <>
           <CompleteVideoSection cta={ctaConfig} />
-          <CompleteProofSection />
+          <CompleteProofSection isWhatsapp={isWhatsapp} />
         </>
       )}
 
@@ -576,12 +579,12 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
         ctaExternal={isWhatsapp}
       />
 
-      {isComplete && <CompleteAudienceSection />}
+      {isComplete && <CompleteAudienceSection isWhatsapp={isWhatsapp} />}
 
       {/* ---------------- Method (timeline) ---------------- */}
       <Method />
 
-      {isComplete && <CompleteIncludedSection cta={ctaConfig} />}
+      {isComplete && <CompleteIncludedSection cta={ctaConfig} isWhatsapp={isWhatsapp} />}
 
       {/* ---------------- Templates ---------------- */}
       <section className="v2-section" id="modelos">
@@ -638,7 +641,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
       </section>
 
       {/* ---------------- Testimonials (carousel) ---------------- */}
-      <Testimonials />
+      <Testimonials isWhatsapp={isWhatsapp} />
 
       {isComplete && <CompleteAboutSection />}
 
@@ -683,7 +686,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
                 <li><Check size={16} /> Hospedagem de alta velocidade</li>
                 <li><Check size={16} /> Certificado SSL de segurança</li>
                 <li><Check size={16} /> Configuração de SEO (Google)</li>
-                <li><Check size={16} /> Botão de WhatsApp flutuante</li>
+                <li><Check size={16} /> {isWhatsapp ? 'Botão de WhatsApp flutuante' : 'Botão de checkout configurado'}</li>
                 <li><Check size={16} /> 1 edição gratuita por mês</li>
                 <li><Check size={16} /> Suporte via e-mail</li>
               </ul>
@@ -707,11 +710,11 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
               <ul className="v2-plan-list">
                 <li><Check size={16} /> <strong>Site pronto em até 48h</strong></li>
                 <li><Check size={16} /> <strong>Domínio grátis (1º ano)</strong></li>
-                <li><Check size={16} /> <strong>Suporte VIP via WhatsApp</strong></li>
+                <li><Check size={16} /> <strong>{isWhatsapp ? 'Suporte VIP via WhatsApp' : 'Suporte VIP prioritário'}</strong></li>
                 <li><Check size={16} /> <strong>Até 2 edições gratuitas / mês</strong></li>
                 <li><Check size={16} /> Atualizações contínuas</li>
                 <li><Check size={16} /> Hospedagem de alta velocidade</li>
-                <li><Check size={16} /> SSL, SEO e WhatsApp inclusos</li>
+                <li><Check size={16} /> {isWhatsapp ? 'SSL, SEO e WhatsApp inclusos' : 'SSL, SEO e checkout inclusos'}</li>
               </ul>
               <a href={pricingCtaHref} className="v2-btn v2-btn-primary v2-btn-full" {...externalLinkProps}>
                 {isWhatsapp ? 'Falar sobre Profissional' : 'Assinar Profissional'}
@@ -729,10 +732,11 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
           <Reveal className="v2-head v2-head-left">
             <span className="v2-kicker">FAQ</span>
             <h2 className="v2-h2">Perguntas frequentes.</h2>
-            <p className="v2-lead">Ainda com dúvidas? Falamos pelo WhatsApp a qualquer momento.</p>
-            <a href={isWhatsapp ? WHATSAPP_URL : '#contato'} className="v2-btn v2-btn-ghost" {...externalLinkProps}>
-              <MessageCircle size={16} /> Falar com consultor
-            </a>
+            <p className="v2-lead">
+              {isWhatsapp
+                ? 'Ainda com dúvidas? Falamos pelo WhatsApp a qualquer momento.'
+                : 'Ainda com dúvidas? Veja as respostas mais comuns antes de escolher seu plano.'}
+            </p>
           </Reveal>
 
           <div className="v2-faq-list">
@@ -773,9 +777,6 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
               <a href={finalCtaHref} className="v2-btn v2-btn-primary v2-btn-lg" {...externalLinkProps}>
                 {finalCtaLabel} <ArrowRight size={18} />
               </a>
-              <a href={WHATSAPP_URL} className="v2-btn v2-btn-ghost v2-btn-lg" target="_blank" rel="noreferrer">
-                <MessageCircle size={17} /> Falar no WhatsApp
-              </a>
             </div>
             <div className="v2-cta-badges">
               <span><Clock size={14} /> Entrega em 48h</span>
@@ -810,7 +811,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
             </div>
             <div>
               <h5>Contato</h5>
-              <a href={isWhatsapp ? WHATSAPP_URL : '#contato'} {...externalLinkProps}>Falar com consultor</a>
+              <a href={WHATSAPP_URL} target="_blank" rel="noreferrer">WhatsApp</a>
               <a href="#">contato@siterapido.com</a>
             </div>
           </div>
@@ -866,9 +867,11 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
       )}
 
       {/* Floating WhatsApp */}
-      <a href={WHATSAPP_URL} className="v2-wa" aria-label="Falar no WhatsApp" target="_blank" rel="noreferrer">
-        <MessageCircle size={24} />
-      </a>
+      {isWhatsapp && (
+        <a href={WHATSAPP_URL} className="v2-wa" aria-label="Falar no WhatsApp" target="_blank" rel="noreferrer">
+          <MessageCircle size={24} />
+        </a>
+      )}
     </div>
   );
 }
