@@ -100,7 +100,7 @@ const faqs = [
   },
   {
     q: 'O domínio está incluso?',
-    a: 'No plano Profissional registramos o domínio com validade de 1 ano gratuitamente. A renovação a partir do 2º ano é cobrada apenas pelo custo de registro.',
+    a: 'O domínio pode ser configurado junto com o site conforme a disponibilidade e as condições do plano contratado. A renovação segue o custo do registrador.',
   },
 ];
 
@@ -110,6 +110,8 @@ const WHATSAPP_URL =
   import.meta.env.VITE_WHATSAPP_URL ||
   `https://wa.me/?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const COMPLETE_VIDEO_URL = import.meta.env.VITE_COMPLETE_VIDEO_URL || '';
+const CHECKOUT_MONTHLY_URL = 'https://pay.kiwify.com.br/G5sOsHT';
+const CHECKOUT_ANNUAL_URL = 'https://pay.kiwify.com.br/KFhge4J';
 
 const socialProof = [
   { value: '48h', label: 'prazo médio de primeira versão' },
@@ -286,7 +288,7 @@ function CompleteIncludedSection({ cta, isWhatsapp }: { cta: CtaConfig; isWhatsa
     'Hospedagem rápida e segura',
     'SSL, SEO básico e performance',
     isWhatsapp ? 'Botões e integração com WhatsApp' : 'Botões e integração com checkout',
-    'Domínio grátis no plano Profissional',
+    'Configuração de domínio orientada',
     'Manutenção e edições mensais',
   ];
 
@@ -396,7 +398,6 @@ type LandingV2Props = {
 
 export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'standard' }: LandingV2Props) {
   const [scrolled, setScrolled] = useState(false);
-  const [annual, setAnnual] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [activeCat, setActiveCat] = useState('Todos');
   const [selectedTpl, setSelectedTpl] = useState<(typeof templates)[number] | null>(null);
@@ -457,7 +458,6 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
   const externalLinkProps = isWhatsapp ? { target: '_blank', rel: 'noreferrer' } : {};
   const primaryCtaHref = isWhatsapp ? WHATSAPP_URL : '#planos';
   const primaryCtaLabel = isWhatsapp ? 'Falar no WhatsApp' : 'Quero meu site';
-  const pricingCtaHref = isWhatsapp ? WHATSAPP_URL : '#contato';
   const finalCtaHref = isWhatsapp ? WHATSAPP_URL : '#planos';
   const finalCtaLabel = isWhatsapp ? 'Chamar no WhatsApp' : 'Quero meu site';
   const isComplete = version === 'complete';
@@ -631,33 +631,17 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
             <p className="v2-lead">Não pague pelo desenvolvimento. Escolha só como manter seu site no ar.</p>
           </Reveal>
 
-          <Reveal className="v2-toggle">
-            <button
-              className={!annual ? 'is-on' : ''}
-              onClick={() => setAnnual(false)}
-            >
-              Mensal
-            </button>
-            <button
-              className={annual ? 'is-on' : ''}
-              onClick={() => setAnnual(true)}
-            >
-              Anual <span className="v2-save">−2 meses</span>
-            </button>
-          </Reveal>
-
           <div className="v2-plans">
             <Reveal className="v2-plan">
               <div className="v2-plan-top">
-                <h3>Essencial</h3>
-                <p>Para profissionais começando no digital.</p>
+                <h3>Mensal</h3>
+                <p>Plano Essencial para começar sem compromisso anual.</p>
               </div>
               <div className="v2-price">
                 <span className="v2-cur">R$</span>
-                <span className="v2-amt">{annual ? '124,90' : '149,90'}</span>
+                <span className="v2-amt">149,90</span>
                 <span className="v2-per">/mês</span>
               </div>
-              {annual && <div className="v2-billed">Cobrado R$ 1.499 anualmente</div>}
               <ul className="v2-plan-list">
                 <li><Check size={16} /> Site pronto em até 48h</li>
                 <li><Check size={16} /> Hospedagem de alta velocidade</li>
@@ -667,34 +651,42 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
                 <li><Check size={16} /> 1 edição gratuita por mês</li>
                 <li><Check size={16} /> Suporte via e-mail</li>
               </ul>
-              <a href={pricingCtaHref} className="v2-btn v2-btn-ghost v2-btn-full" {...externalLinkProps}>
-                {isWhatsapp ? 'Falar sobre Essencial' : 'Quero meu site'}
+              <a
+                href={isWhatsapp ? WHATSAPP_URL : CHECKOUT_MONTHLY_URL}
+                className="v2-btn v2-btn-ghost v2-btn-full"
+                {...(isWhatsapp ? externalLinkProps : { target: '_blank', rel: 'noreferrer' })}
+              >
+                {isWhatsapp ? 'Falar sobre Mensal' : 'Quero meu site'}
               </a>
             </Reveal>
 
             <Reveal delay={100} className="v2-plan v2-plan-featured">
-              <div className="v2-plan-flag">Mais escolhido</div>
+              <div className="v2-plan-flag">Recomendado</div>
               <div className="v2-plan-top">
-                <h3>Profissional</h3>
-                <p>Uma máquina completa, com suporte ágil.</p>
+                <h3>Anual</h3>
+                <p>Plano Essencial com economia para manter seu site no ar.</p>
               </div>
               <div className="v2-price">
                 <span className="v2-cur">R$</span>
-                <span className="v2-amt">{annual ? '141,50' : '169,90'}</span>
+                <span className="v2-amt">124,90</span>
                 <span className="v2-per">/mês</span>
               </div>
-              {annual && <div className="v2-billed">Cobrado R$ 1.698 anualmente</div>}
+              <div className="v2-billed">Cobrado R$ 1.499 anualmente</div>
               <ul className="v2-plan-list">
                 <li><Check size={16} /> <strong>Site pronto em até 48h</strong></li>
-                <li><Check size={16} /> <strong>Domínio grátis (1º ano)</strong></li>
-                <li><Check size={16} /> <strong>{isWhatsapp ? 'Suporte VIP via WhatsApp' : 'Suporte VIP prioritário'}</strong></li>
-                <li><Check size={16} /> <strong>Até 2 edições gratuitas / mês</strong></li>
-                <li><Check size={16} /> Atualizações contínuas</li>
-                <li><Check size={16} /> Hospedagem de alta velocidade</li>
-                <li><Check size={16} /> {isWhatsapp ? 'SSL, SEO e WhatsApp inclusos' : 'SSL, SEO e checkout inclusos'}</li>
+                <li><Check size={16} /> <strong>Hospedagem de alta velocidade</strong></li>
+                <li><Check size={16} /> <strong>Certificado SSL de segurança</strong></li>
+                <li><Check size={16} /> <strong>Configuração de SEO (Google)</strong></li>
+                <li><Check size={16} /> {isWhatsapp ? 'Botão de WhatsApp flutuante' : 'Botão de checkout configurado'}</li>
+                <li><Check size={16} /> 1 edição gratuita por mês</li>
+                <li><Check size={16} /> Suporte via e-mail</li>
               </ul>
-              <a href={pricingCtaHref} className="v2-btn v2-btn-primary v2-btn-full" {...externalLinkProps}>
-                {isWhatsapp ? 'Falar sobre Profissional' : 'Quero meu site'}
+              <a
+                href={isWhatsapp ? WHATSAPP_URL : CHECKOUT_ANNUAL_URL}
+                className="v2-btn v2-btn-primary v2-btn-full"
+                {...(isWhatsapp ? externalLinkProps : { target: '_blank', rel: 'noreferrer' })}
+              >
+                {isWhatsapp ? 'Falar sobre Anual' : 'Quero meu site'}
               </a>
             </Reveal>
           </div>

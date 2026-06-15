@@ -664,34 +664,6 @@
 @media (max-width: 860px) { .v2-quotes { grid-template-columns: 1fr; } }
 
 /* ----------------------- pricing ----------------------- */
-.v2-toggle {
-  display: flex;
-  gap: 0.25rem;
-  padding: 0.3rem;
-  border: 1px solid var(--v2-line);
-  border-radius: 999px;
-  background: var(--v2-surface);
-  width: fit-content;
-  margin: -2rem auto 3rem;
-}
-.v2-toggle button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1.2rem;
-  border-radius: 999px;
-  font-size: 0.9rem;
-  color: var(--v2-dim);
-  transition: all 0.25s var(--v2-ease);
-}
-.v2-toggle button.is-on { background: var(--v2-text); color: #000; font-weight: 600; }
-.v2-save {
-  font-size: 0.72rem;
-  color: var(--v2-accent-deep);
-  font-weight: 600;
-}
-.v2-toggle button.is-on .v2-save { color: #4a7a16; }
-
 .v2-plans {
   display: grid;
   grid-template-columns: 1fr 1fr;

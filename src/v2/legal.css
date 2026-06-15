@@ -28,7 +28,7 @@
 .v2-legal-hero {
   display: grid;
   gap: 1rem;
-  max-width: 900px;
+  text-align: left;
 }
 
 .v2-legal-hero h1 {

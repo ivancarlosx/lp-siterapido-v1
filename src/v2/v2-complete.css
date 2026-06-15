@@ -290,17 +290,27 @@
 
 .v2-team-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(6, minmax(0, 180px));
+  justify-content: center;
   gap: 1.15rem;
 }
 
 .v2-team-card {
   display: grid;
+  grid-column: span 2;
   min-height: 100%;
   border: 1px solid var(--v2-line);
   border-radius: 16px;
   background: var(--v2-surface);
   overflow: hidden;
+}
+
+.v2-team-card:nth-child(4) {
+  grid-column: 2 / span 2;
+}
+
+.v2-team-card:nth-child(5) {
+  grid-column: 4 / span 2;
 }
 
 .v2-team-card-photo {
@@ -389,6 +399,11 @@
 
 @media (max-width: 720px) {
   .v2-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .v2-team-card,
+  .v2-team-card:nth-child(4),
+  .v2-team-card:nth-child(5) {
+    grid-column: auto;
+  }
 }
 
 @media (max-width: 480px) {
