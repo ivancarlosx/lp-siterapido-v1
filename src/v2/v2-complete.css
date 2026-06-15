@@ -279,13 +279,19 @@
 }
 
 .v2-about-grid {
-  align-items: center;
+  grid-template-columns: 1fr;
+  gap: clamp(2rem, 5vw, 3.5rem);
+  align-items: start;
+}
+
+.v2-about-grid .v2-head {
+  max-width: 760px;
 }
 
 .v2-team-grid {
   display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 1rem;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.15rem;
 }
 
 .v2-team-card {
@@ -379,10 +385,6 @@
   .v2-proof-score strong {
     max-width: 16ch;
   }
-}
-
-@media (max-width: 1100px) {
-  .v2-team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 720px) {

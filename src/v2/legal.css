@@ -44,26 +44,35 @@
 
 .v2-legal-content {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 300px;
+  grid-template-columns: minmax(0, 780px) 300px;
   gap: clamp(2rem, 6vw, 5rem);
   margin-top: clamp(3rem, 7vw, 5rem);
+  align-items: start;
 }
 
-.v2-legal-content article {
-  padding: 1.5rem 0;
-  border-top: 1px solid var(--v2-line);
-}
-
-.v2-legal-content article h2 {
-  font-size: clamp(1.18rem, 2vw, 1.55rem);
-  letter-spacing: 0;
-}
-
-.v2-legal-content article p {
-  margin-top: 0.75rem;
+.v2-legal-article {
   color: var(--v2-dim);
-  line-height: 1.72;
-  max-width: 72ch;
+  font-size: clamp(1rem, 1.25vw, 1.08rem);
+  line-height: 1.78;
+}
+
+.v2-legal-article > p {
+  margin-bottom: 1.35rem;
+}
+
+.v2-legal-article section {
+  margin-top: 2.1rem;
+}
+
+.v2-legal-article h2 {
+  color: var(--v2-text);
+  font-size: clamp(1.16rem, 2vw, 1.45rem);
+  letter-spacing: 0;
+  margin-bottom: 0.7rem;
+}
+
+.v2-legal-article p {
+  max-width: 74ch;
 }
 
 .v2-legal-company {
