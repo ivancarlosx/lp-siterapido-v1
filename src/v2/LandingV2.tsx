@@ -2,8 +2,6 @@ import { useState, useEffect, useCallback, useRef } from 'react';
 import {
   ArrowUpRight,
   ArrowRight,
-  ChevronLeft,
-  ChevronRight,
   Check,
   BadgeCheck,
   Globe2,
@@ -321,12 +319,6 @@ function CompleteIncludedSection({ cta, isWhatsapp }: { cta: CtaConfig; isWhatsa
 }
 
 function CompleteAboutSection() {
-  const [activeMember, setActiveMember] = useState(0);
-  const member = teamMembers[activeMember];
-  const goToMember = (direction: -1 | 1) => {
-    setActiveMember((current) => (current + direction + teamMembers.length) % teamMembers.length);
-  };
-
   return (
     <section className="v2-section v2-about" id="quem-somos">
       <div className="v2-wrap v2-about-grid">
@@ -339,35 +331,20 @@ function CompleteAboutSection() {
           </p>
         </Reveal>
 
-        <Reveal delay={120} className="v2-team-carousel">
-          <div className="v2-team-photo">
-            <img src={member.img} alt={`${member.name}, ${member.role}`} />
-          </div>
-          <div className="v2-team-copy">
-            <span>{member.role}</span>
-            <h3>{member.name}</h3>
-            <p>{member.quote}</p>
-          </div>
-          <div className="v2-team-controls">
-            <button type="button" onClick={() => goToMember(-1)} aria-label="Pessoa anterior">
-              <ChevronLeft size={18} />
-            </button>
-            <div className="v2-team-dots" aria-label="Selecionar pessoa do time">
-              {teamMembers.map((item, index) => (
-                <button
-                  key={item.name}
-                  type="button"
-                  className={activeMember === index ? 'is-active' : ''}
-                  onClick={() => setActiveMember(index)}
-                  aria-label={`Ver ${item.name}`}
-                />
-              ))}
-            </div>
-            <button type="button" onClick={() => goToMember(1)} aria-label="Próxima pessoa">
-              <ChevronRight size={18} />
-            </button>
-          </div>
-        </Reveal>
+        <div className="v2-team-grid">
+          {teamMembers.map((member, index) => (
+            <Reveal key={member.name} delay={index * 80} className="v2-team-card">
+              <div className="v2-team-card-photo">
+                <img src={member.img} alt={`${member.name}, ${member.role}`} />
+              </div>
+              <div className="v2-team-card-copy">
+                <span>{member.role}</span>
+                <h3>{member.name}</h3>
+                <p>{member.quote}</p>
+              </div>
+            </Reveal>
+          ))}
+        </div>
       </div>
     </section>
   );
@@ -805,9 +782,9 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
             </div>
             <div>
               <h5>Legal</h5>
-              <a href="#">Termos de uso</a>
-              <a href="#">Privacidade</a>
-              <a href="#">Cancelamento</a>
+              <a href="/legal/termos">Termos de uso</a>
+              <a href="/legal/privacidade">Privacidade</a>
+              <a href="/legal/cancelamento">Cancelamento</a>
             </div>
             <div>
               <h5>Contato</h5>
@@ -818,7 +795,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
         </div>
         <div className="v2-wrap v2-footer-bottom">
           <span>© {new Date().getFullYear()} SiteRápido 48h. Todos os direitos reservados.</span>
-          <span>CNPJ 00.000.000/0001-00</span>
+          <span>CNPJ 31.305.061/0001-90</span>
         </div>
       </footer>
 

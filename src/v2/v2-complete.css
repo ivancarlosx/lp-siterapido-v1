@@ -282,111 +282,68 @@
   align-items: center;
 }
 
-.v2-team-carousel {
+.v2-team-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.95fr);
-  border-top: 1px solid var(--v2-line);
-  border-bottom: 1px solid var(--v2-line);
-  min-height: 520px;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 1rem;
 }
 
-.v2-team-photo {
-  position: relative;
+.v2-team-card {
+  display: grid;
+  min-height: 100%;
+  border: 1px solid var(--v2-line);
+  border-radius: 16px;
+  background: var(--v2-surface);
   overflow: hidden;
-  min-height: 520px;
 }
 
-.v2-team-photo::after {
+.v2-team-card-photo {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background: var(--v2-bg-2);
+}
+
+.v2-team-card-photo::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, transparent 55%, rgba(8, 9, 10, 0.42));
+  background: linear-gradient(180deg, transparent 56%, rgba(8, 9, 10, 0.36));
   pointer-events: none;
 }
 
-.v2-team-photo img {
+.v2-team-card-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   filter: saturate(0.92) contrast(1.02);
 }
 
-.v2-team-copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: clamp(1.5rem, 4vw, 3.5rem);
-  border-left: 1px solid var(--v2-line);
+.v2-team-card-copy {
+  display: grid;
+  gap: 0.7rem;
+  padding: 1.05rem;
 }
 
-.v2-team-copy > span {
+.v2-team-card-copy > span {
   color: var(--v2-accent-deep);
   text-transform: uppercase;
-  letter-spacing: 0.16em;
-  font-size: 0.74rem;
+  letter-spacing: 0.12em;
+  font-size: 0.68rem;
   font-weight: 700;
 }
 
-.v2-team-copy h3 {
+.v2-team-card-copy h3 {
   font-family: var(--v2-display);
-  font-size: clamp(2rem, 4.4vw, 4.3rem);
-  letter-spacing: -0.055em;
-  line-height: 0.95;
-  margin: 1rem 0 1.2rem;
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  letter-spacing: 0;
+  line-height: 1.08;
 }
 
-.v2-team-copy p {
+.v2-team-card-copy p {
   color: var(--v2-dim);
-  font-size: clamp(0.95rem, 1.15vw, 1.06rem);
-  line-height: 1.58;
-  max-width: 32ch;
-}
-
-.v2-team-controls {
-  grid-column: 1 / -1;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1rem 0 1.45rem;
-}
-
-.v2-team-controls > button {
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
-  border: 1px solid var(--v2-line-2);
-  background: var(--v2-surface);
-  color: var(--v2-text);
-  display: grid;
-  place-items: center;
-  transition: transform 0.2s var(--v2-ease), border-color 0.2s var(--v2-ease);
-}
-
-.v2-team-controls > button:hover {
-  transform: translateY(-2px);
-  border-color: var(--v2-accent-line);
-}
-
-.v2-team-dots {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  flex: 1;
-}
-
-.v2-team-dots button {
-  width: 38px;
-  height: 3px;
-  border-radius: 999px;
-  background: var(--v2-line-2);
-  transition: width 0.25s var(--v2-ease), background 0.25s var(--v2-ease);
-}
-
-.v2-team-dots button.is-active {
-  width: 62px;
-  background: var(--v2-accent);
+  font-size: 0.82rem;
+  line-height: 1.52;
 }
 
 .v2-guarantees {
@@ -395,8 +352,7 @@
 
 .v2-white .v2-video-card,
 .v2-white .v2-audience-icon,
-.v2-white .v2-guarantee-icon,
-.v2-white .v2-team-controls > button {
+.v2-white .v2-guarantee-icon {
   background: rgba(255, 255, 255, 0.7);
 }
 
@@ -404,7 +360,7 @@
   background: linear-gradient(180deg, transparent, rgba(251, 252, 247, 0.52));
 }
 
-.v2-white .v2-team-photo::after {
+.v2-white .v2-team-card-photo::after {
   background: linear-gradient(180deg, transparent 58%, rgba(251, 252, 247, 0.35));
 }
 
@@ -416,28 +372,25 @@
     grid-template-columns: 1fr;
   }
 
-  .v2-proof-score,
-  .v2-team-photo {
+  .v2-proof-score {
     min-height: auto;
-  }
-
-  .v2-team-carousel {
-    grid-template-columns: 1fr;
-    min-height: auto;
-  }
-
-  .v2-team-photo {
-    aspect-ratio: 4 / 3;
-  }
-
-  .v2-team-copy {
-    border-left: none;
-    border-top: 1px solid var(--v2-line);
   }
 
   .v2-proof-score strong {
     max-width: 16ch;
   }
+}
+
+@media (max-width: 1100px) {
+  .v2-team-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+@media (max-width: 720px) {
+  .v2-team-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (max-width: 480px) {
+  .v2-team-grid { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 640px) {
