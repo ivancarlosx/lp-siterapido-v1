@@ -108,7 +108,7 @@ const WHATSAPP_MESSAGE =
   'Olá! Quero criar meu site com a SiteRápido. Pode me ajudar?';
 const WHATSAPP_URL =
   import.meta.env.VITE_WHATSAPP_URL ||
-  `https://wa.me/?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
+  `https://wa.me/5521966107008?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
 const COMPLETE_VIDEO_URL = import.meta.env.VITE_COMPLETE_VIDEO_URL || '';
 const CHECKOUT_MONTHLY_URL = 'https://pay.kiwify.com.br/G5sOsHT';
 const CHECKOUT_ANNUAL_URL = 'https://pay.kiwify.com.br/KFhge4J';
