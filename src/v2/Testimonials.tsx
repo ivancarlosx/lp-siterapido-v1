@@ -11,7 +11,7 @@ type Item =
 const items: Item[] = [
   {
     type: 'video',
-    name: 'Vanessa Melo',
+    name: 'Luana e Maurício',
     role: 'Cliente SiteRápido',
     poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/oar2.jpg',
     videoId: 'gXUCsEJ6kl4',
@@ -25,7 +25,7 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Marcos Araújo',
+    name: 'Luana e Maurício',
     role: 'Cliente SiteRápido',
     poster: 'https://i.ytimg.com/vi/fGzaeQ-qiTg/oar2.jpg',
     videoId: 'fGzaeQ-qiTg',
@@ -39,7 +39,7 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Gilberto Alvares',
+    name: 'Luana e Maurício',
     role: 'Cliente SiteRápido',
     poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/oar2.jpg',
     videoId: 'IG_g3ipkQSA',
@@ -154,7 +154,7 @@ export function Testimonials({ isWhatsapp = true }: { isWhatsapp?: boolean }) {
                 </div>
               </article>
             ) : (
-              <button className="v2-tcard v2-tcard-video" key={`video-${t.name}`} onClick={() => setVideo(t)}>
+              <button className="v2-tcard v2-tcard-video" key={`video-${t.videoId}`} onClick={() => setVideo(t)}>
                 <div className="v2-tcard-video-thumb">
                   <img className="v2-tcard-poster" src={t.poster} alt={t.name} loading="lazy" />
                   <span className="v2-tcard-play"><Play size={22} fill="currentColor" /></span>
