@@ -2,7 +2,6 @@ import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import './index.css'
-import App from './App.tsx'
 import { LandingV2 } from './v2/LandingV2.tsx'
 import { LegalPage } from './v2/LegalPage.tsx'
 
@@ -10,7 +9,7 @@ createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<App />} />
+        <Route path="/" element={<LandingV2 version="complete" />} />
         <Route path="/v2-ivan" element={<LandingV2 />} />
         <Route path="/v2-white" element={<LandingV2 variant="white" />} />
         <Route path="/v2-whatsapp" element={<LandingV2 goal="whatsapp" />} />
