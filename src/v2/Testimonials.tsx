@@ -11,7 +11,7 @@ type Item =
 const items: Item[] = [
   {
     type: 'video',
-    name: 'Luana e Maurício',
+    name: 'Luana',
     role: 'Cliente SiteRápido',
     poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/oar2.jpg',
     videoId: 'gXUCsEJ6kl4',
@@ -25,7 +25,7 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Luana e Maurício',
+    name: 'Marcos',
     role: 'Cliente SiteRápido',
     poster: 'https://i.ytimg.com/vi/fGzaeQ-qiTg/oar2.jpg',
     videoId: 'fGzaeQ-qiTg',
@@ -39,7 +39,7 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Luana e Maurício',
+    name: 'Maurício',
     role: 'Cliente SiteRápido',
     poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/oar2.jpg',
     videoId: 'IG_g3ipkQSA',
