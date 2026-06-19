@@ -10,6 +10,13 @@ type Item =
 
 const items: Item[] = [
   {
+    type: 'video',
+    name: 'Vanessa Melo',
+    role: 'Cliente SiteRápido',
+    poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/oar2.jpg',
+    videoId: 'gXUCsEJ6kl4',
+  },
+  {
     type: 'text',
     name: 'Dr. Ricardo Silva',
     role: 'Dentista',
@@ -32,10 +39,10 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Vanessa Melo',
+    name: 'Gilberto Alvares',
     role: 'Cliente SiteRápido',
-    poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/oar2.jpg',
-    videoId: 'gXUCsEJ6kl4',
+    poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/oar2.jpg',
+    videoId: 'IG_g3ipkQSA',
   },
   {
     type: 'text',
@@ -78,13 +85,6 @@ const items: Item[] = [
     role: 'Advogada',
     content: 'O resultado passou a credibilidade que eu precisava sem perder simplicidade. Em poucos dias eu já estava divulgando o novo site.',
     avatar: 'https://images.unsplash.com/photo-1551836022-d5d88e9218df?auto=format&fit=crop&w=150&q=80',
-  },
-  {
-    type: 'video',
-    name: 'Gilberto Alvares',
-    role: 'Cliente SiteRápido',
-    poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/oar2.jpg',
-    videoId: 'IG_g3ipkQSA',
   },
 ];
 
