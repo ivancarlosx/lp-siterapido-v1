@@ -6,7 +6,7 @@ import './testimonials.css';
 
 type Item =
   | { type: 'text'; name: string; role: string; content: string; avatar: string }
-  | { type: 'video'; name: string; role: string; quote: string; poster: string; videoId: string };
+  | { type: 'video'; name: string; role: string; poster: string; videoId: string };
 
 const items: Item[] = [
   {
@@ -20,7 +20,6 @@ const items: Item[] = [
     type: 'video',
     name: 'Marcos Araújo',
     role: 'Cliente SiteRápido',
-    quote: 'Depoimento em vídeo sobre a experiência com a SiteRápido.',
     poster: 'https://i.ytimg.com/vi/fGzaeQ-qiTg/hqdefault.jpg',
     videoId: 'fGzaeQ-qiTg',
   },
@@ -35,7 +34,6 @@ const items: Item[] = [
     type: 'video',
     name: 'Vanessa Melo',
     role: 'Cliente SiteRápido',
-    quote: 'Depoimento em vídeo sobre a experiência com a SiteRápido.',
     poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/hqdefault.jpg',
     videoId: 'gXUCsEJ6kl4',
   },
@@ -85,7 +83,6 @@ const items: Item[] = [
     type: 'video',
     name: 'Gilberto Alvares',
     role: 'Cliente SiteRápido',
-    quote: 'Depoimento em vídeo sobre a experiência com a SiteRápido.',
     poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/hqdefault.jpg',
     videoId: 'IG_g3ipkQSA',
   },
@@ -158,11 +155,12 @@ export function Testimonials({ isWhatsapp = true }: { isWhatsapp?: boolean }) {
               </article>
             ) : (
               <button className="v2-tcard v2-tcard-video" key={`video-${t.name}`} onClick={() => setVideo(t)}>
-                <img className="v2-tcard-poster" src={t.poster} alt={t.name} loading="lazy" />
-                <span className="v2-tcard-play"><Play size={22} fill="currentColor" /></span>
-                <span className="v2-tcard-badge">Depoimento em vídeo</span>
-                <div className="v2-tcard-vmeta">
-                  <p>"{t.quote}"</p>
+                <div className="v2-tcard-video-thumb">
+                  <img className="v2-tcard-poster" src={t.poster} alt={t.name} loading="lazy" />
+                  <span className="v2-tcard-play"><Play size={22} fill="currentColor" /></span>
+                </div>
+                <div className="v2-tcard-author v2-tcard-video-author">
+                  <img src={t.poster} alt={t.name} loading="lazy" />
                   <div>
                     <strong>{t.name}</strong>
                     <span>{t.role}</span>
@@ -199,7 +197,6 @@ export function Testimonials({ isWhatsapp = true }: { isWhatsapp?: boolean }) {
                 <strong>{video.name}</strong>
                 <span>{video.role}</span>
               </div>
-              <p>"{video.quote}"</p>
             </div>
           </div>
         </div>
