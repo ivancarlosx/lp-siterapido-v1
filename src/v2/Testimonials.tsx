@@ -20,7 +20,7 @@ const items: Item[] = [
     type: 'video',
     name: 'Marcos Araújo',
     role: 'Cliente SiteRápido',
-    poster: 'https://i.ytimg.com/vi/fGzaeQ-qiTg/hqdefault.jpg',
+    poster: 'https://i.ytimg.com/vi/fGzaeQ-qiTg/oar2.jpg',
     videoId: 'fGzaeQ-qiTg',
   },
   {
@@ -34,7 +34,7 @@ const items: Item[] = [
     type: 'video',
     name: 'Vanessa Melo',
     role: 'Cliente SiteRápido',
-    poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/hqdefault.jpg',
+    poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/oar2.jpg',
     videoId: 'gXUCsEJ6kl4',
   },
   {
@@ -83,7 +83,7 @@ const items: Item[] = [
     type: 'video',
     name: 'Gilberto Alvares',
     role: 'Cliente SiteRápido',
-    poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/hqdefault.jpg',
+    poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/oar2.jpg',
     videoId: 'IG_g3ipkQSA',
   },
 ];

@@ -9,7 +9,6 @@ import {
   Minus,
   MessageCircle,
   Clock,
-  PlayCircle,
   ShieldCheck,
   Star,
   Target,
@@ -109,7 +108,6 @@ const WHATSAPP_MESSAGE =
 const WHATSAPP_URL =
   import.meta.env.VITE_WHATSAPP_URL ||
   `https://wa.me/5521966107008?text=${encodeURIComponent(WHATSAPP_MESSAGE)}`;
-const COMPLETE_VIDEO_URL = import.meta.env.VITE_COMPLETE_VIDEO_URL || '';
 const CHECKOUT_MONTHLY_URL = 'https://pay.kiwify.com.br/G5sOsHT';
 const CHECKOUT_ANNUAL_URL = 'https://pay.kiwify.com.br/KFhge4J';
 
@@ -158,43 +156,6 @@ type CtaConfig = {
   primaryCtaLabel: string;
   externalLinkProps: { target?: string; rel?: string };
 };
-
-function CompleteVideoSection({ cta }: { cta: CtaConfig }) {
-  return (
-    <section className="v2-section v2-complete-video" id="video">
-      <div className="v2-wrap v2-video-grid">
-        <Reveal className="v2-head v2-head-left">
-          <span className="v2-kicker">Apresentação</span>
-          <h2 className="v2-h2">Veja como tiramos seu site do papel em 48 horas.</h2>
-          <p className="v2-lead">
-            Uma visão direta do processo, do briefing até a publicação, para você entender
-            exatamente o que acontece antes de escolher um plano.
-          </p>
-          <a href={cta.primaryCtaHref} className="v2-btn v2-btn-primary" {...cta.externalLinkProps}>
-            {cta.primaryCtaLabel} <ArrowRight size={17} />
-          </a>
-        </Reveal>
-
-        <Reveal delay={120} className="v2-video-card">
-          {COMPLETE_VIDEO_URL ? (
-            <iframe
-              src={COMPLETE_VIDEO_URL}
-              title="Apresentação SiteRápido"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            />
-          ) : (
-            <div className="v2-video-placeholder">
-              <PlayCircle size={72} />
-              <span>Vídeo de apresentação</span>
-              <strong>Site pronto, seguro e publicado em 48h</strong>
-            </div>
-          )}
-        </Reveal>
-      </div>
-    </section>
-  );
-}
 
 function CompleteProofSection({ isWhatsapp }: { isWhatsapp: boolean }) {
   return (
@@ -463,7 +424,7 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
   const isComplete = version === 'complete';
   const ctaConfig = { primaryCtaHref, primaryCtaLabel, externalLinkProps };
   const navLinks = [
-    ...(isComplete ? [{ href: '#video', label: 'Vídeo' }, { href: '#quem-somos', label: 'Quem somos' }] : []),
+    ...(isComplete ? [{ href: '#quem-somos', label: 'Quem somos' }] : []),
     { href: '#metodo', label: 'Método' },
     { href: '#modelos', label: 'Modelos' },
     { href: '#planos', label: 'Planos' },
@@ -544,7 +505,6 @@ export function LandingV2({ variant = 'dark', goal = 'checkout', version = 'stan
 
       {isComplete && (
         <>
-          <CompleteVideoSection cta={ctaConfig} />
           <CompleteProofSection isWhatsapp={isWhatsapp} />
         </>
       )}

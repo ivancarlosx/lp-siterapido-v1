@@ -65,6 +65,8 @@
 /* video card */
 .v2-tcard-video {
   position: relative;
+  flex-basis: 280px;
+  min-height: auto;
   padding: 0;
   cursor: pointer;
   color: var(--v2-text);
@@ -74,9 +76,10 @@
 }
 .v2-tcard-video-thumb {
   position: relative;
-  flex: 1;
-  min-height: 0;
-  background: #000;
+  flex: 0 0 auto;
+  aspect-ratio: 9 / 16;
+  width: 100%;
+  background: var(--v2-bg);
   display: grid;
   place-items: center;
   overflow: hidden;
@@ -84,7 +87,7 @@
 .v2-tcard-poster {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  object-fit: cover;
   transition: transform 0.5s var(--v2-ease), filter 0.4s var(--v2-ease);
 }
 .v2-tcard-video:hover .v2-tcard-poster { transform: scale(1.02); filter: brightness(1.08); }
@@ -147,4 +150,5 @@
 
 @media (max-width: 560px) {
   .v2-tcard { flex-basis: 80vw; }
+  .v2-tcard-video { flex-basis: min(80vw, 300px); }
 }
