@@ -1,11 +1,12 @@
-import { useRef } from 'react';
-import { Star, Quote, ChevronLeft, ChevronRight } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
+import { Star, Quote, Play, ChevronLeft, ChevronRight, X } from 'lucide-react';
 import { Reveal } from './Reveal';
+import { lenisStop, lenisStart } from './lenis';
 import './testimonials.css';
 
 type Item =
   | { type: 'text'; name: string; role: string; content: string; avatar: string }
-  | { type: 'video'; name: string; role: string; quote: string; poster: string };
+  | { type: 'video'; name: string; role: string; quote: string; poster: string; videoId: string };
 
 const items: Item[] = [
   {
@@ -17,10 +18,11 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Camila Duarte',
-    role: 'Confeitaria Doce Encanto',
-    quote: 'Triplicou meus pedidos pelo WhatsApp.',
-    poster: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=600&q=80',
+    name: 'Marcos Araújo',
+    role: 'Cliente SiteRápido',
+    quote: 'Depoimento em vídeo sobre a experiência com a SiteRápido.',
+    poster: 'https://i.ytimg.com/vi/fGzaeQ-qiTg/hqdefault.jpg',
+    videoId: 'fGzaeQ-qiTg',
   },
   {
     type: 'text',
@@ -31,10 +33,11 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Lucas Almeida',
-    role: 'Personal Trainer',
-    quote: 'O site virou minha máquina de captar alunos.',
-    poster: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80',
+    name: 'Vanessa Melo',
+    role: 'Cliente SiteRápido',
+    quote: 'Depoimento em vídeo sobre a experiência com a SiteRápido.',
+    poster: 'https://i.ytimg.com/vi/gXUCsEJ6kl4/hqdefault.jpg',
+    videoId: 'gXUCsEJ6kl4',
   },
   {
     type: 'text',
@@ -80,18 +83,20 @@ const items: Item[] = [
   },
   {
     type: 'video',
-    name: 'Patrícia Nunes',
-    role: 'Studio Sálvia',
-    quote: 'Profissional, rápido e sem dor de cabeça.',
-    poster: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80',
+    name: 'Gilberto Alvares',
+    role: 'Cliente SiteRápido',
+    quote: 'Depoimento em vídeo sobre a experiência com a SiteRápido.',
+    poster: 'https://i.ytimg.com/vi/IG_g3ipkQSA/hqdefault.jpg',
+    videoId: 'IG_g3ipkQSA',
   },
 ];
 
 export function Testimonials({ isWhatsapp = true }: { isWhatsapp?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null);
-  const displayItems = items.filter((item): item is Extract<Item, { type: 'text' }> => item.type === 'text').map((item) => {
+  const [video, setVideo] = useState<Extract<Item, { type: 'video' }> | null>(null);
+  const displayItems = items.map((item) => {
     if (isWhatsapp) return item;
-    if (item.name === 'Gustavo Mendes') {
+    if (item.type === 'text' && item.name === 'Gustavo Mendes') {
       return {
         ...item,
         content: 'Fizemos o briefing e em 2 dias o site estava rodando. Hoje recebo muito mais contatos pelo site.',
@@ -108,42 +113,97 @@ export function Testimonials({ isWhatsapp = true }: { isWhatsapp?: boolean }) {
     track.scrollBy({ left: dir * amount, behavior: 'smooth' });
   };
 
+  useEffect(() => {
+    if (!video) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') setVideo(null);
+    };
+    lenisStop();
+    window.addEventListener('keydown', onKey);
+    return () => {
+      lenisStart();
+      window.removeEventListener('keydown', onKey);
+    };
+  }, [video]);
+
   return (
-    <section className="v2-section" id="depoimentos">
-      <div className="v2-wrap">
-        <Reveal className="v2-head">
-          <span className="v2-kicker">Depoimentos</span>
-          <h2 className="v2-h2">Quem já acelerou conosco.</h2>
-        </Reveal>
-      </div>
+    <>
+      <section className="v2-section" id="depoimentos">
+        <div className="v2-wrap">
+          <Reveal className="v2-head">
+            <span className="v2-kicker">Depoimentos</span>
+            <h2 className="v2-h2">Quem já acelerou conosco.</h2>
+          </Reveal>
+        </div>
 
-      <div className="v2-tt-track" ref={trackRef}>
-        <div className="v2-tt-pad" aria-hidden />
-        {displayItems.map((t, i) => (
-          <article className="v2-tcard v2-tcard-text" key={i}>
-            <Quote className="v2-tcard-q" size={34} />
-            <div className="v2-stars">
-              {[...Array(5)].map((_, s) => (
-                <Star key={s} size={14} className="v2-star" />
-              ))}
+        <div className="v2-tt-track" ref={trackRef}>
+          <div className="v2-tt-pad" aria-hidden />
+          {displayItems.map((t) =>
+            t.type === 'text' ? (
+              <article className="v2-tcard v2-tcard-text" key={`text-${t.name}`}>
+                <Quote className="v2-tcard-q" size={34} />
+                <div className="v2-stars">
+                  {[...Array(5)].map((_, s) => (
+                    <Star key={s} size={14} className="v2-star" />
+                  ))}
+                </div>
+                <p>"{t.content}"</p>
+                <div className="v2-tcard-author">
+                  <img src={t.avatar} alt={t.name} loading="lazy" />
+                  <div>
+                    <strong>{t.name}</strong>
+                    <span>{t.role}</span>
+                  </div>
+                </div>
+              </article>
+            ) : (
+              <button className="v2-tcard v2-tcard-video" key={`video-${t.name}`} onClick={() => setVideo(t)}>
+                <img className="v2-tcard-poster" src={t.poster} alt={t.name} loading="lazy" />
+                <span className="v2-tcard-play"><Play size={22} fill="currentColor" /></span>
+                <span className="v2-tcard-badge">Depoimento em vídeo</span>
+                <div className="v2-tcard-vmeta">
+                  <p>"{t.quote}"</p>
+                  <div>
+                    <strong>{t.name}</strong>
+                    <span>{t.role}</span>
+                  </div>
+                </div>
+              </button>
+            )
+          )}
+          <div className="v2-tt-pad" aria-hidden />
+        </div>
+
+        <div className="v2-tt-nav">
+          <button onClick={() => scrollByCards(-1)} aria-label="Anterior"><ChevronLeft size={20} /></button>
+          <button onClick={() => scrollByCards(1)} aria-label="Próximo"><ChevronRight size={20} /></button>
+        </div>
+      </section>
+
+      {video && (
+        <div className="v2-modal" onClick={() => setVideo(null)} role="dialog" aria-modal="true">
+          <button className="v2-modal-close" onClick={() => setVideo(null)} aria-label="Fechar">
+            <X size={20} />
+          </button>
+          <div className="v2-vmodal" onClick={(e) => e.stopPropagation()}>
+            <div className="v2-vmodal-player">
+              <iframe
+                src={`https://www.youtube.com/embed/${video.videoId}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
+                title={`Depoimento ${video.name}`}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
+              />
             </div>
-            <p>"{t.content}"</p>
-            <div className="v2-tcard-author">
-              <img src={t.avatar} alt={t.name} loading="lazy" />
+            <div className="v2-vmodal-foot">
               <div>
-                <strong>{t.name}</strong>
-                <span>{t.role}</span>
+                <strong>{video.name}</strong>
+                <span>{video.role}</span>
               </div>
+              <p>"{video.quote}"</p>
             </div>
-          </article>
-        ))}
-        <div className="v2-tt-pad" aria-hidden />
-      </div>
-
-      <div className="v2-tt-nav">
-        <button onClick={() => scrollByCards(-1)} aria-label="Anterior"><ChevronLeft size={20} /></button>
-        <button onClick={() => scrollByCards(1)} aria-label="Próximo"><ChevronRight size={20} /></button>
-      </div>
-    </section>
+          </div>
+        </div>
+      )}
+    </>
   );
 }
